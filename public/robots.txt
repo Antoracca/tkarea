@@ -1,0 +1,6 @@
+# robots.txt for TK ARÉA
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://tkarea.fr/sitemap.xml

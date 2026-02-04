@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-tk-orange: #FF4D00;
+  --color-tk-dark: #0F172A;
+  --color-tk-darker: #020617;
+  --color-tk-grey: #334155;
+  --color-tk-light: #F8FAFC;
+  --color-tk-black: #111111;
+  --color-tk-white: #FFFFFF;
+
+  --font-family-sans: var(--font-space), system-ui, sans-serif;
+  --font-family-heading: var(--font-syne), system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  overflow-x: hidden;
+  cursor: auto;
+  width: 100%;
+  position: relative;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- TYPOGRAPHIE --- */
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+p, a, span {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* --- ANIMATIONS AMÉLIORÉES --- */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* --- IMAGES DECORATIVES --- */
+.img-mask {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.img-mask-hidden {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+/* --- SELECTION TEXT --- */
+::selection {
+  background-color: #FF4D00;
+  color: white;
+}
+
+/* --- FOCUS VISIBLE --- */
+*:focus-visible {
+  outline: 2px solid #FF4D00;
+  outline-offset: 2px;
 }
