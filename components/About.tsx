@@ -2,37 +2,46 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles, Workflow } from "lucide-react";
 import { useRef } from "react";
 
-const trustedBy = [
-  "Collectivités",
-  "BTP",
-  "Industrie",
-  "Logistique",
-  "Immobilier",
-  "Voirie",
+const trustedBy = ["Collectivites", "BTP", "Industrie", "Logistique", "Immobilier", "Voirie"];
+
+const quickStats = [
+  { value: "10+", label: "ans experience" },
+  { value: "24/7", label: "support terrain" },
+  { value: "100%", label: "conformite suivie" },
 ];
 
 const highlights = [
   {
     icon: ShieldCheck,
-    title: "Conformité assurée",
-    text: "Normes NF et PMR intégrées dans chaque phase du chantier.",
+    title: "Conformite assuree",
+    text: "Normes NF et PMR integrees dans chaque phase du chantier.",
     metric: "100%",
   },
   {
     icon: Clock3,
     title: "Intervention rapide",
-    text: "Équipe mobilisable en urgence avec un pilotage opérationnel clair.",
+    text: "Equipe mobilisable en urgence avec un pilotage operationnel clair.",
     metric: "24/7",
   },
   {
     icon: Sparkles,
     title: "Rendu professionnel",
-    text: "Marquage lisible, signalisation propre et finitions soignées.",
+    text: "Marquage lisible, signalisation propre et finitions soignees.",
     metric: "10+ ans",
   },
+];
+
+const processSteps = ["Diagnostic terrain", "Plan action", "Execution", "Controle final"];
+const tickerItems = [
+  "Devis sous 24h",
+  "Diagnostic circulation offert",
+  "Creneaux de nuit disponibles",
+  "Accompagnement collectivites",
+  "Intervention urgente sur appel",
+  "Contact: 06 05 76 99 52",
 ];
 
 export default function About() {
@@ -42,13 +51,13 @@ export default function About() {
     offset: ["start end", "end start"],
   });
 
-  const visualY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, -42]);
 
   return (
-    <section id="agence" ref={sectionRef} className="relative overflow-hidden bg-[#f4f6fb] py-24 md:py-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_15%,rgba(255,77,0,0.16),transparent_40%),radial-gradient(circle_at_90%_0%,rgba(10,10,10,0.08),transparent_32%)]" />
+    <section id="agence" ref={sectionRef} className="relative overflow-hidden bg-[#f3f6fb] py-24 md:py-32">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_15%,rgba(255,77,0,0.18),transparent_40%),radial-gradient(circle_at_90%_0%,rgba(10,10,10,0.08),transparent_34%)]" />
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(10,10,10,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,0.5) 1px, transparent 1px)",
@@ -58,7 +67,7 @@ export default function About() {
 
       <div className="container-custom relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           className="mb-10 md:mb-14"
@@ -73,8 +82,17 @@ export default function About() {
           </div>
 
           <h2 className="mt-5 max-w-5xl text-heading-1 text-[#0d0d0f]">
-            Une équipe qui transforme vos contraintes terrain en <span className="text-tk-orange">résultats visibles</span>
+            Une equipe qui transforme vos contraintes terrain en <span className="text-tk-orange">resultats visibles</span>
           </h2>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {quickStats.map((item) => (
+              <div key={item.label} className="rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5">
+                <p className="text-xl font-black text-[#0f1012]">{item.value}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#5a5f6a]">{item.label}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
@@ -85,20 +103,27 @@ export default function About() {
             className="lg:col-span-6"
           >
             <p className="text-base leading-relaxed text-[#3d4048] md:text-lg">
-              TK ARÉA accompagne les projets de marquage, signalisation et aménagement avec une méthode simple:
-              analyser, sécuriser, exécuter, contrôler. Vous gagnez du temps, de la clarté et un rendu professionnel.
+              TK AREA accompagne les projets de marquage, signalisation et amenagement avec une methode simple:
+              analyser, securiser, executer, controler. Vous gagnez du temps, de la clarte et un rendu professionnel.
             </p>
 
             <div className="mt-6 space-y-3">
               {[
-                "Pilotage opérationnel du démarrage à la livraison",
-                "Coordination équipe, matériel et contraintes de site",
-                "Suivi qualité final avec vérification terrain",
-              ].map((point) => (
-                <div key={point} className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5">
+                "Pilotage operationnel du demarrage a la livraison",
+                "Coordination equipe, materiel et contraintes de site",
+                "Suivi qualite final avec verification terrain",
+              ].map((point, index) => (
+                <motion.div
+                  key={point}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ delay: 0.08 * index }}
+                  className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5"
+                >
                   <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-tk-orange" />
                   <p className="text-sm text-[#2e323b]">{point}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -114,8 +139,22 @@ export default function About() {
                 href="#realisations"
                 className="inline-flex items-center justify-center rounded-full border border-[#131313]/20 bg-white px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-[#141417] transition-all hover:border-[#141417]/35"
               >
-                Voir nos réalisations
+                Voir nos realisations
               </a>
+            </div>
+
+            <div className="mt-7 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/6 md:p-5">
+              <div className="mb-3 flex items-center gap-2">
+                <Workflow size={16} className="text-tk-orange" />
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#343944]">Methode agence</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                {processSteps.map((step, idx) => (
+                  <div key={step} className="rounded-lg bg-[#f4f6fb] px-3 py-2 text-xs font-bold text-[#2c313a]">
+                    {idx + 1}. {step}
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -131,7 +170,7 @@ export default function About() {
                 <div className="relative aspect-[16/12] md:aspect-[16/10]">
                   <Image
                     src="/equipe.png"
-                    alt="Équipe TK ARÉA"
+                    alt="Equipe TK AREA"
                     fill
                     priority
                     className="object-cover"
@@ -142,12 +181,12 @@ export default function About() {
               </div>
 
               <div className="absolute left-5 top-5 rounded-full bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#0f0f10]">
-                Équipe TK ARÉA
+                Equipe TK AREA
               </div>
 
               <div className="absolute bottom-4 left-4 right-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/15 bg-black/55 p-4 backdrop-blur-md">
-                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-tk-orange">Expérience</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-tk-orange">Experience</p>
                   <p className="mt-1 text-2xl font-black text-white">10+ ans</p>
                 </div>
                 <div className="rounded-2xl border border-white/15 bg-black/55 p-4 backdrop-blur-md">
@@ -214,7 +253,7 @@ export default function About() {
             <div className="relative aspect-[16/11] md:aspect-[16/8]">
               <Image
                 src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1800&q=80"
-                alt="Préparation d’équipe en atelier"
+                alt="Preparation equipe en atelier"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 62vw"
@@ -222,32 +261,47 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-tk-orange">Méthode</p>
-              <h3 className="mt-1 text-2xl font-black text-white md:text-3xl">Une exécution carrée, sans perte de temps</h3>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-tk-orange">Methode</p>
+              <h3 className="mt-1 text-2xl font-black text-white md:text-3xl">Une execution carree, sans perte de temps</h3>
             </div>
           </article>
 
           <article className="relative overflow-hidden rounded-3xl bg-white p-6 shadow-sm ring-1 ring-black/6 lg:col-span-4 md:p-7">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-tk-orange">Contact direct</p>
-            <h3 className="mt-3 text-2xl font-black text-[#121212]">Une question? On avance vite.</h3>
+            <h3 className="mt-3 text-2xl font-black text-[#121212]">Une question ? On avance vite.</h3>
             <p className="mt-3 text-sm leading-relaxed text-[#4a4f59]">
-              Partagez votre besoin et nous revenons avec un cadrage clair, un délai réaliste et une proposition
-              concrète.
+              Partagez votre besoin et nous revenons avec un cadrage clair, un delai realiste et une proposition
+              concrete.
             </p>
             <div className="mt-6 space-y-2 rounded-2xl bg-[#f5f6fa] p-4">
               <p className="text-sm font-semibold text-[#17191d]">06 05 76 99 52</p>
               <p className="text-sm text-[#4a4f59]">info@tkarea.fr</p>
-              <p className="text-sm text-[#4a4f59]">2 Allée Melilot, 49080 Bouchemaine</p>
+              <p className="text-sm text-[#4a4f59]">2 Allee Melilot, 49080 Bouchemaine</p>
             </div>
             <a
               href="#contact"
               className="mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-tk-orange"
             >
-              Contacter l’agence
+              Contacter agence
               <ArrowRight size={15} />
             </a>
           </article>
         </motion.div>
+
+        <div className="mt-8 overflow-hidden rounded-2xl border border-[#1b1c1f]/10 bg-white py-3 shadow-sm">
+          <motion.div
+            className="flex min-w-max items-center"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+          >
+            {[...tickerItems, ...tickerItems].map((item, idx) => (
+              <div key={`${item}-${idx}`} className="mx-4 flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-tk-orange" />
+                <span className="text-sm font-semibold text-[#22262d]">{item}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-b from-transparent via-tk-orange/25 to-[#050505]" />
