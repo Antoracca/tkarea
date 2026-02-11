@@ -165,33 +165,43 @@ export default function About() {
             viewport={{ once: true, amount: 0.2 }}
             className="lg:col-span-6"
           >
-            <article className="relative overflow-hidden rounded-[2rem] bg-[#101113] p-2 shadow-[0_30px_80px_-35px_rgba(10,10,10,0.65)]">
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <div className="relative aspect-[16/12] md:aspect-[16/10]">
+            <article className="relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-[#101113] p-3 md:p-2 shadow-2xl">
+              <div className="relative overflow-hidden rounded-xl md:rounded-[1.5rem]">
+                {/* Image avec meilleur ratio mobile */}
+                <div className="relative aspect-[4/5] sm:aspect-[16/11] md:aspect-[16/10]">
                   <Image
                     src="/equipe.png"
-                    alt="Equipe TK AREA"
+                    alt="Equipe TK AREA en action sur un chantier"
                     fill
                     priority
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 46vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  {/* Gradient overlay amélioré */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                  {/* Effet de vignette pour mobile */}
+                  <div className="absolute inset-0 md:hidden bg-gradient-to-b from-black/20 via-transparent to-black/90" />
                 </div>
               </div>
 
-              <div className="absolute left-5 top-5 rounded-full bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#0f0f10]">
-                Equipe TK AREA
+              {/* Badge "Equipe" - Plus grand et mieux positionné sur mobile */}
+              <div className="absolute left-4 top-4 md:left-5 md:top-5 rounded-full bg-white px-5 py-2.5 md:px-4 md:py-2 text-xs md:text-[11px] font-black uppercase tracking-[0.16em] text-[#0f0f10] shadow-xl">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-tk-orange animate-pulse" />
+                  Équipe TK AREA
+                </span>
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/15 bg-black/55 p-4 backdrop-blur-md">
-                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-tk-orange">Experience</p>
-                  <p className="mt-1 text-2xl font-black text-white">10+ ans</p>
+              {/* Stats cards - Stack vertical sur mobile pour meilleure lisibilité */}
+              <div className="absolute bottom-4 left-4 right-4 md:bottom-4 md:left-4 md:right-4 grid grid-cols-1 xs:grid-cols-2 gap-2.5 md:gap-3">
+                <div className="rounded-xl md:rounded-2xl border border-white/20 bg-black/70 md:bg-black/55 p-4 md:p-4 backdrop-blur-md">
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-tk-orange">Expérience</p>
+                  <p className="mt-1.5 text-3xl md:text-2xl font-black text-white">10+ ans</p>
                 </div>
-                <div className="rounded-2xl border border-white/15 bg-black/55 p-4 backdrop-blur-md">
+                <div className="rounded-xl md:rounded-2xl border border-white/20 bg-black/70 md:bg-black/55 p-4 md:p-4 backdrop-blur-md">
                   <p className="text-xs font-bold uppercase tracking-[0.15em] text-tk-orange">Couverture</p>
-                  <p className="mt-1 text-2xl font-black text-white">Grand Ouest</p>
+                  <p className="mt-1.5 text-3xl md:text-2xl font-black text-white">Grand Ouest</p>
                 </div>
               </div>
             </article>
@@ -247,10 +257,10 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-8 grid gap-4 lg:grid-cols-12"
+          className="mt-8 grid gap-4 md:gap-4 lg:grid-cols-12"
         >
-          <article className="group relative overflow-hidden rounded-3xl bg-[#101113] lg:col-span-8">
-            <div className="relative aspect-[16/11] md:aspect-[16/8]">
+          <article className="group relative overflow-hidden rounded-2xl md:rounded-3xl bg-[#101113] lg:col-span-8">
+            <div className="relative aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/8]">
               <Image
                 src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1800&q=80"
                 alt="Preparation equipe en atelier"
@@ -258,32 +268,36 @@ export default function About() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 62vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-tk-orange">Methode</p>
-              <h3 className="mt-1 text-2xl font-black text-white md:text-3xl">Une execution carree, sans perte de temps</h3>
+              <p className="text-xs md:text-xs font-bold uppercase tracking-[0.16em] text-tk-orange">Méthode</p>
+              <h3 className="mt-2 text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight">Une exécution carrée, sans perte de temps</h3>
             </div>
           </article>
 
-          <article className="relative overflow-hidden rounded-3xl bg-white p-6 shadow-sm ring-1 ring-black/6 lg:col-span-4 md:p-7">
+          <article className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-white p-5 md:p-6 lg:p-7 shadow-sm ring-1 ring-black/6 lg:col-span-4">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-tk-orange">Contact direct</p>
-            <h3 className="mt-3 text-2xl font-black text-[#121212]">Une question ? On avance vite.</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#4a4f59]">
-              Partagez votre besoin et nous revenons avec un cadrage clair, un delai realiste et une proposition
-              concrete.
+            <h3 className="mt-3 text-xl md:text-2xl font-black text-[#121212] leading-tight">Une question ? On avance vite.</h3>
+            <p className="mt-3 text-sm md:text-sm leading-relaxed text-[#4a4f59]">
+              Partagez votre besoin et nous revenons avec un cadrage clair, un délai réaliste et une proposition
+              concrète.
             </p>
-            <div className="mt-6 space-y-2 rounded-2xl bg-[#f5f6fa] p-4">
-              <p className="text-sm font-semibold text-[#17191d]">06 05 76 99 52</p>
-              <p className="text-sm text-[#4a4f59]">info@tkarea.fr</p>
-              <p className="text-sm text-[#4a4f59]">2 Allee Melilot, 49080 Bouchemaine</p>
+            <div className="mt-5 md:mt-6 space-y-2.5 md:space-y-2 rounded-xl md:rounded-2xl bg-[#f5f6fa] p-4 md:p-4">
+              <a href="tel:0605769952" className="block text-base md:text-sm font-bold text-[#17191d] hover:text-tk-orange transition-colors">
+                📞 06 05 76 99 52
+              </a>
+              <a href="mailto:info@tkarea.fr" className="block text-sm text-[#4a4f59] hover:text-tk-orange transition-colors">
+                ✉️ info@tkarea.fr
+              </a>
+              <p className="text-sm text-[#4a4f59]">📍 2 Allée Mélilot, 49080 Bouchemaine</p>
             </div>
             <a
               href="#contact"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-tk-orange"
+              className="mt-5 md:mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-tk-orange hover:gap-3 transition-all"
             >
               Contacter agence
-              <ArrowRight size={15} />
+              <ArrowRight size={16} />
             </a>
           </article>
         </motion.div>
