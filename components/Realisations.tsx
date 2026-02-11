@@ -183,21 +183,24 @@ function FlyerCard({ item, onClick }: { item: FlyerItem; onClick: () => void }) 
 
         {/* Mockup image avec effet 3D */}
         <motion.div
-          className="relative aspect-[5/7] rounded-xl overflow-hidden shadow-2xl bg-white p-3"
+          className="relative aspect-[5/7] rounded-xl overflow-hidden shadow-2xl bg-gray-50"
           whileHover={{ scale: 1.02, rotateY: 2, rotateX: -2 }}
           transition={{ duration: 0.3 }}
           style={{ transformStyle: "preserve-3d" }}
         >
-          <div className="relative w-full h-full">
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 40vw"
-              priority
-              quality={90}
-            />
+          <div className="relative w-full h-full flex items-center justify-center p-2">
+            <div className="relative w-full h-full scale-110">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 40vw"
+                priority={true}
+                loading="eager"
+                quality={95}
+              />
+            </div>
           </div>
 
           {/* Overlay avec bouton zoom */}
@@ -266,7 +269,7 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm overflow-y-auto"
         onClick={onClose}
       >
         <motion.div
@@ -274,7 +277,7 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ type: "spring", duration: 0.5 }}
-          className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+          className="relative max-w-4xl w-full my-8 bg-white rounded-2xl shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
@@ -287,30 +290,31 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
             <X size={20} />
           </motion.button>
 
-          {/* Image fullscreen */}
-          <div className="relative w-full aspect-[5/7] md:aspect-[16/10] bg-white p-6 md:p-8">
-            <div className="relative w-full h-full">
+          {/* Image fullscreen - Scrollable */}
+          <div className="relative w-full bg-white overflow-auto max-h-[70vh] md:max-h-[75vh]">
+            <div className="relative w-full min-h-[500px] p-4 md:p-8">
               <Image
                 src={item.image}
                 alt={item.title}
-                fill
-                className="object-contain"
-                sizes="90vw"
+                width={800}
+                height={1200}
+                className="w-full h-auto object-contain"
                 priority
-                quality={95}
+                loading="eager"
+                quality={100}
               />
             </div>
           </div>
 
           {/* Info bar */}
-          <div className="p-6 bg-gradient-to-r from-tk-orange to-tk-orange-light">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-2xl font-black text-white mb-1">{item.title}</h3>
+          <div className="p-4 md:p-6 bg-gradient-to-r from-tk-orange to-tk-orange-light">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-black text-white mb-1">{item.title}</h3>
                 <p className="text-sm text-white/90">{item.description}</p>
               </div>
               <motion.button
-                className="px-6 py-3 bg-white text-tk-orange rounded-xl font-bold flex items-center gap-2 hover:shadow-xl transition-all"
+                className="px-6 py-3 bg-white text-tk-orange rounded-xl font-bold flex items-center gap-2 hover:shadow-xl transition-all whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
