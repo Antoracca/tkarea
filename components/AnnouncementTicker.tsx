@@ -52,9 +52,9 @@ const announcements: AnnouncementItem[] = [
 
 const toneStyles: Record<AnnouncementTone, string> = {
   default: "border-white/20 bg-white/[0.06] text-gray-100",
-  offer: "border-tk-orange/45 bg-tk-orange/12 text-white",
-  urgent: "border-red-400/45 bg-red-500/12 text-red-100",
-  service: "border-sky-300/35 bg-sky-300/10 text-sky-50",
+  offer: "border-tk-orange/50 bg-tk-orange/15 text-white",
+  urgent: "border-tk-orange/50 bg-tk-orange/20 text-white",
+  service: "border-tk-orange/30 bg-tk-orange/10 text-gray-100",
 };
 
 export default function AnnouncementTicker() {
@@ -94,9 +94,9 @@ export default function AnnouncementTicker() {
       }}
       transition={{ duration: 0.24, ease: "easeOut" }}
     >
-      <div className="relative border-y border-white/10 bg-[#0D1119]/95 shadow-[0_14px_28px_rgba(0,0,0,0.35)] backdrop-blur-md">
+      <div className="relative border-y border-white/10 bg-tk-black/95 shadow-[0_14px_28px_rgba(0,0,0,0.35)] backdrop-blur-md">
         <div className="mx-auto flex max-w-[1600px] items-center gap-2 px-2 py-2 md:gap-3 md:px-5">
-          <div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-tk-orange/40 bg-tk-orange/12 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-tk-orange md:px-3">
+          <div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-tk-orange/50 bg-tk-orange/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-tk-orange md:px-3">
             <Megaphone size={12} />
             <span className="hidden sm:inline">Annonces agence</span>
             <span className="sm:hidden">Infos</span>

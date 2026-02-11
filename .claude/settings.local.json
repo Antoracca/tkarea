@@ -8,7 +8,8 @@
       "WebFetch(domain:n1882003.websitebuilder.online)",
       "Bash(npm run lint)",
       "Bash(git checkout:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\n💾 SAUVEGARDE PRE-REFONTE - Version fonctionnelle\n\nVersion actuelle avant refonte complète professionnelle:\n- Navbar avec animations Framer Motion\n- Hero section avec typographie\n- Services avec cards hover\n- About avec stats\n- Contact form\n- Tailwind v4 configuré\n- Logo TK ARÉA intégré\n\nCette version fonctionne et sert de backup avant amélioration.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }
