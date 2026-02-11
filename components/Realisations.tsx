@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Award, CheckCircle2, Download, ExternalLink, Eye, Maximize2, TrendingUp, X, Zap } from "lucide-react";
+import { ArrowRight, Award, CheckCircle2, Download, Eye, MapPin, Maximize2, Phone, TrendingUp, X, Zap } from "lucide-react";
 import { useState } from "react";
 
 type PortfolioItem = {
@@ -133,25 +133,28 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
       </div>
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex-1">
-            <p className="text-xs font-bold uppercase tracking-wider text-tk-orange mb-1">
-              📍 {item.location}
-            </p>
-            <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white leading-tight">
+      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 lg:p-6">
+        <div className="flex items-start justify-between gap-3 mb-2 md:mb-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <MapPin size={12} className="text-tk-orange shrink-0" />
+              <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-tk-orange truncate">
+                {item.location}
+              </p>
+            </div>
+            <h3 className="text-base md:text-lg lg:text-xl font-black text-white leading-tight">
               {item.title}
             </h3>
           </div>
         </div>
 
-        <p className="text-sm text-gray-200 mb-3 leading-relaxed">
+        <p className="text-xs md:text-sm text-gray-200 mb-2.5 md:mb-3 leading-relaxed line-clamp-2">
           {item.description}
         </p>
 
-        <div className="inline-flex items-center gap-2 rounded-full bg-tk-orange px-4 py-2 shadow-lg">
-          <CheckCircle2 size={14} className="text-white" />
-          <span className="text-xs font-bold text-white">{item.result}</span>
+        <div className="inline-flex items-center gap-1.5 md:gap-2 rounded-full bg-tk-orange px-3 md:px-4 py-1.5 md:py-2 shadow-lg">
+          <CheckCircle2 size={12} className="text-white shrink-0" />
+          <span className="text-[10px] md:text-xs font-bold text-white whitespace-nowrap">{item.result}</span>
         </div>
       </div>
 
@@ -180,18 +183,22 @@ function FlyerCard({ item, onClick }: { item: FlyerItem; onClick: () => void }) 
 
         {/* Mockup image avec effet 3D */}
         <motion.div
-          className="relative aspect-[5/7] rounded-xl overflow-hidden shadow-2xl bg-white"
+          className="relative aspect-[5/7] rounded-xl overflow-hidden shadow-2xl bg-white p-3"
           whileHover={{ scale: 1.02, rotateY: 2, rotateX: -2 }}
           transition={{ duration: 0.3 }}
           style={{ transformStyle: "preserve-3d" }}
         >
-          <Image
-            src={item.image}
-            alt={item.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 40vw"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 40vw"
+              priority
+              quality={90}
+            />
+          </div>
 
           {/* Overlay avec bouton zoom */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
@@ -281,14 +288,18 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
           </motion.button>
 
           {/* Image fullscreen */}
-          <div className="relative w-full aspect-[5/7] md:aspect-[16/10] bg-gray-100">
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              className="object-contain"
-              sizes="90vw"
-            />
+          <div className="relative w-full aspect-[5/7] md:aspect-[16/10] bg-white p-6 md:p-8">
+            <div className="relative w-full h-full">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-contain"
+                sizes="90vw"
+                priority
+                quality={95}
+              />
+            </div>
           </div>
 
           {/* Info bar */}
@@ -367,7 +378,7 @@ export default function Realisations() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-3 gap-4 md:gap-6 mb-12 max-w-3xl mx-auto"
+          className="grid grid-cols-3 gap-3 md:gap-6 mb-12 max-w-3xl mx-auto"
         >
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
@@ -378,14 +389,14 @@ export default function Realisations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-2xl text-center transition-shadow"
+                className="bg-white rounded-xl md:rounded-2xl p-3 md:p-5 lg:p-6 shadow-lg hover:shadow-2xl text-center transition-shadow"
                 whileHover={{ y: -4 }}
               >
-                <Icon size={24} className="text-tk-orange mx-auto mb-3" />
-                <div className="text-3xl md:text-4xl font-black text-tk-black mb-1">
+                <Icon size={20} className="text-tk-orange mx-auto mb-2 md:mb-3" />
+                <div className="text-xl md:text-3xl lg:text-4xl font-black text-tk-black mb-1 leading-tight">
                   {stat.value}
                 </div>
-                <div className="text-xs md:text-sm font-bold text-gray-600 uppercase tracking-wider">
+                <div className="text-[9px] md:text-xs lg:text-sm font-bold text-gray-600 uppercase tracking-wider leading-tight">
                   {stat.label}
                 </div>
               </motion.div>
@@ -491,7 +502,8 @@ export default function Realisations() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              📞 Urgence 24/7
+              <Phone size={18} className="shrink-0" />
+              Urgence 24/7
             </motion.a>
           </div>
         </motion.div>
