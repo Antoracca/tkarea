@@ -246,13 +246,15 @@ function FlyerCard({ item, onClick }: { item: FlyerItem; onClick: () => void }) 
               <Eye size={16} />
               Voir en détail
             </motion.button>
-            <motion.button
+            <motion.a
+              href={item.image}
+              download={`TK-AREA-${item.title.replace(/\s+/g, '-')}.jpg`}
               className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-tk-orange text-tk-orange rounded-xl font-bold text-sm hover:bg-tk-orange hover:text-white transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <Download size={16} />
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </div>
@@ -313,14 +315,16 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
                 <h3 className="text-xl md:text-2xl font-black text-white mb-1">{item.title}</h3>
                 <p className="text-sm text-white/90">{item.description}</p>
               </div>
-              <motion.button
+              <motion.a
+                href={item.image}
+                download={`TK-AREA-${item.title.replace(/\s+/g, '-')}.jpg`}
                 className="px-6 py-3 bg-white text-tk-orange rounded-xl font-bold flex items-center gap-2 hover:shadow-xl transition-all whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Download size={18} />
                 Télécharger
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </motion.div>
