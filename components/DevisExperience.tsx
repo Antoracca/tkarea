@@ -7,10 +7,6 @@ import {
 } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const ChatModal = dynamic(() => import("./ChatModal"), { ssr: false });
 
 /* ═══════════════════════════════════════════════════════════════
    TYPES
@@ -683,8 +679,6 @@ function IPhoneFrame({ children }: { children: React.ReactNode }) {
 export default function DevisExperience() {
   const phoneRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(phoneRef, { once: true, margin: "-100px" });
-  const [chatOpen, setChatOpen] = useState(false);
-
   const processSteps = [
     { num: "01", title: "Envoyez votre demande", description: "Décrivez votre projet via notre plateforme sécurisée et joignez vos plans ou photos.", lottie: "/Sending.lottie" },
     { num: "02", title: "Analyse experte", description: "Nos techniciens étudient votre dossier et vérifient les spécificités d'intervention.", lottie: "/speed.lottie" },
@@ -775,7 +769,7 @@ export default function DevisExperience() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <motion.button
-                  onClick={() => setChatOpen(true)}
+                  onClick={() => window.dispatchEvent(new CustomEvent("openChat"))}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-tk-orange to-[#ff3300] text-white rounded-full font-bold uppercase tracking-wider text-[14px] shadow-[0_8px_32px_rgba(255,77,0,0.35)] hover:shadow-[0_12px_48px_rgba(255,77,0,0.45)] transition-all duration-300"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
@@ -785,7 +779,6 @@ export default function DevisExperience() {
                 </motion.button>
               </div>
 
-              <ChatModal open={chatOpen} onClose={() => setChatOpen(false)} />
             </motion.div>
 
           </div>

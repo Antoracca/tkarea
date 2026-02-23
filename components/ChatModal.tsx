@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUp, X, Minimize2, Maximize2, Phone, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowUp, X, Minimize2, Maximize2, Phone, Loader2 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -16,29 +16,31 @@ type Message = {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   SUGGESTION CHIPS
+   SUGGESTIONS
    ═══════════════════════════════════════════════════════════════ */
 
 const SUGGESTIONS = [
   "Vous faites le marquage PMR ?",
-  "Quel est votre délai d'intervention ?",
+  "Délai d'intervention ?",
   "Vous intervenez sur Angers ?",
   "Comment obtenir un devis ?",
+  "Intervention d'urgence ?",
+  "Quelles normes respectez-vous ?",
 ];
 
 /* ═══════════════════════════════════════════════════════════════
-   AVATAR TK — identité visuelle TK Area
+   AVATAR TK
    ═══════════════════════════════════════════════════════════════ */
 
-function TKAvatar({ size = 28 }: { size?: number }) {
+function TKAvatar({ size = 32 }: { size?: number }) {
   return (
     <div
-      className="rounded-full bg-gradient-to-br from-tk-orange to-[#cc3d00] flex items-center justify-center shrink-0 shadow-sm shadow-orange-500/30"
+      className="rounded-full bg-gradient-to-br from-tk-orange to-[#c83200] flex items-center justify-center shrink-0 shadow-sm shadow-orange-500/25"
       style={{ width: size, height: size }}
     >
       <span
         className="text-white font-black leading-none select-none"
-        style={{ fontSize: size * 0.38, letterSpacing: "-0.04em", fontFamily: "system-ui" }}
+        style={{ fontSize: size * 0.37, letterSpacing: "-0.04em", fontFamily: "system-ui" }}
       >
         TK
       </span>
@@ -52,8 +54,6 @@ function TKAvatar({ size = 28 }: { size?: number }) {
 
 function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === "user";
-
-  // Ne pas rendre les bulles vides (état transitoire avant streaming)
   if (!isUser && message.content === "") return null;
 
   return (
@@ -63,9 +63,9 @@ function MessageBubble({ message }: { message: Message }) {
       transition={{ type: "spring", damping: 22, stiffness: 300 }}
       className={`flex w-full ${isUser ? "justify-end" : "justify-start"} gap-2`}
     >
-      {!isUser && <TKAvatar size={28} />}
+      {!isUser && <TKAvatar size={30} />}
       <div
-        className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-[14px] leading-relaxed ${
+        className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-[14px] leading-relaxed ${
           isUser
             ? "bg-tk-orange text-white rounded-br-sm"
             : "bg-white text-gray-800 rounded-bl-sm shadow-sm border border-gray-100"
@@ -86,7 +86,7 @@ function MessageBubble({ message }: { message: Message }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TYPING DOTS — affiché UNIQUEMENT pendant le délai initial
+   TYPING DOTS
    ═══════════════════════════════════════════════════════════════ */
 
 function TypingDots() {
@@ -94,10 +94,10 @@ function TypingDots() {
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 4 }}
-      className="flex items-start gap-2"
+      exit={{ opacity: 0 }}
+      className="flex items-end gap-2"
     >
-      <TKAvatar size={28} />
+      <TKAvatar size={30} />
       <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
         <div className="flex gap-1.5 items-center">
           {[0, 1, 2].map((i) => (
@@ -132,12 +132,11 @@ export default function ChatModal({
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // ── Scroll lock mobile ──
-  // Sur iOS/Android, overflow:hidden seul ne bloque pas le scroll.
-  // On fixe le body à la position courante pour geler la page derrière le modal.
+  /* ── Scroll lock mobile (position:fixed technique for iOS) ── */
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const isMobile = window.innerWidth < 768;
-    if (!isMobile) return; // desktop : pas besoin, pas de backdrop plein écran
+    if (!isMobile) return;
 
     if (open && !minimized) {
       const scrollY = window.scrollY;
@@ -145,7 +144,7 @@ export default function ChatModal({
       document.body.style.top = `-${scrollY}px`;
       document.body.style.left = "0";
       document.body.style.right = "0";
-      document.body.style.overflowY = "scroll"; // évite le décalage de largeur
+      document.body.style.overflowY = "scroll";
       document.body.dataset.scrollY = String(scrollY);
     } else {
       const savedY = parseInt(document.body.dataset.scrollY ?? "0", 10);
@@ -157,9 +156,7 @@ export default function ChatModal({
       delete document.body.dataset.scrollY;
       window.scrollTo(0, savedY);
     }
-
     return () => {
-      // Nettoyage si le composant se démonte alors que le modal est ouvert
       const savedY = parseInt(document.body.dataset.scrollY ?? "0", 10);
       document.body.style.position = "";
       document.body.style.top = "";
@@ -171,8 +168,7 @@ export default function ChatModal({
     };
   }, [open, minimized]);
 
-  // Message de bienvenue — dépend UNIQUEMENT de `open`, pas de messages.length
-  // Évite le bug où setMinimized(false) se déclenchait à chaque nouveau message
+  /* ── Bienvenue — dépend uniquement de open ── */
   useEffect(() => {
     if (!open) return;
     setMinimized(false);
@@ -182,26 +178,25 @@ export default function ChatModal({
           id: "welcome",
           role: "assistant",
           content:
-            "Bonjour ! Je suis l'assistant TK Area. Je peux vous renseigner sur nos prestations de marquage, signalétique, signalisation routière, ou vous aider à préparer un devis. Comment puis-je vous aider ?",
+            "Bonjour ! Je suis l'assistant TK Area. Je peux vous renseigner sur nos prestations de marquage, signalétique et signalisation, ou vous aider à préparer un devis. Comment puis-je vous aider ?",
         },
       ]);
     }
-    setTimeout(() => inputRef.current?.focus(), 300);
+    setTimeout(() => inputRef.current?.focus(), 350);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  // Auto-scroll interne uniquement
+  /* ── Auto-scroll ── */
   const scrollToBottom = useCallback(() => {
-    if (scrollRef.current) {
+    if (scrollRef.current)
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
   }, []);
 
   useEffect(() => {
     requestAnimationFrame(scrollToBottom);
   }, [messages, loading, scrollToBottom]);
 
-  // Envoi du message + streaming
+  /* ── Envoi + streaming ── */
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim() || loading) return;
@@ -211,13 +206,16 @@ export default function ChatModal({
         role: "user",
         content: text.trim(),
       };
-
       const newMessages = [...messages, userMsg];
       setMessages(newMessages);
       setInput("");
       setLoading(true);
 
-      // Placeholder vide — TypingDots l'affiche, pas MessageBubble (content === "")
+      // Reset textarea height
+      if (inputRef.current) {
+        inputRef.current.style.height = "auto";
+      }
+
       const assistantId = (Date.now() + 1).toString();
       setMessages((prev) => [
         ...prev,
@@ -245,30 +243,24 @@ export default function ChatModal({
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-
-          const chunk = decoder.decode(value);
-          const lines = chunk.split("\n");
-
+          const lines = decoder.decode(value).split("\n");
           for (const line of lines) {
-            if (line.startsWith("data: ")) {
-              const data = line.slice(6);
-              if (data === "[DONE]") break;
-              try {
-                const parsed = JSON.parse(data);
-                if (parsed.text) {
-                  accumulated += parsed.text;
-                  setMessages((prev) =>
-                    prev.map((m) =>
-                      m.id === assistantId
-                        ? { ...m, content: accumulated, streaming: true }
-                        : m
-                    )
-                  );
-                }
-              } catch {
-                // ignore parse errors
+            if (!line.startsWith("data: ")) continue;
+            const data = line.slice(6);
+            if (data === "[DONE]") break;
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.text) {
+                accumulated += parsed.text;
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === assistantId
+                      ? { ...m, content: accumulated, streaming: true }
+                      : m
+                  )
+                );
               }
-            }
+            } catch { /* ignore */ }
           }
         }
 
@@ -283,8 +275,7 @@ export default function ChatModal({
             m.id === assistantId
               ? {
                   ...m,
-                  content:
-                    "Désolé, une erreur est survenue. Appelez-nous directement au 06 05 76 99 52.",
+                  content: "Désolé, une erreur est survenue. Appelez-nous directement au 06 05 76 99 52.",
                   streaming: false,
                 }
               : m
@@ -307,49 +298,81 @@ export default function ChatModal({
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
     e.target.style.height = "auto";
-    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+    e.target.style.height = Math.min(e.target.scrollHeight, 100) + "px";
   };
 
-  // Vrai indicateur de "réponse en cours" = message vide + streaming
   const isWaiting = messages.some((m) => m.streaming && m.content === "");
 
   return (
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop mobile — masqué si minimisé pour ne pas bloquer la page */}
+          {/* Backdrop — desktop uniquement, pas sur mobile (full screen) */}
           {!minimized && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={onClose}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[998] md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998] hidden md:block"
             />
           )}
 
-          {/* Modal */}
+          {/* ═══════════════════════════════════════════
+              MODAL
+              - Mobile  : inset-0, slide from bottom, full screen
+              - Desktop : floating bottom-right, 420px
+              ═══════════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ type: "spring", damping: 26, stiffness: 300 }}
-            className={`
-              fixed z-[999] bg-[#F5F6FA] shadow-2xl overflow-hidden flex flex-col
-              bottom-0 left-0 right-0 rounded-t-[24px]
-              ${minimized ? "max-h-fit" : "max-h-[92dvh]"}
-              md:bottom-6 md:right-6 md:left-auto md:rounded-2xl
-              md:w-[420px] ${minimized ? "md:max-h-fit" : "md:max-h-[680px]"}
-            `}
-            style={{ boxShadow: "0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.06)" }}
+            /* Mobile: slide up depuis le bas */
+            initial={{ y: "100%", opacity: 1 }}
+            animate={
+              minimized
+                ? { y: 0, opacity: 1 }
+                : { y: 0, opacity: 1 }
+            }
+            exit={{ y: "100%", opacity: 1 }}
+            transition={{ type: "spring", damping: 28, stiffness: 280 }}
+            className={[
+              "fixed z-[999] flex flex-col overflow-hidden",
+              /* Mobile full screen */
+              "inset-0 bg-[#F2F2F7]",
+              /* Desktop floating */
+              "md:inset-auto md:bottom-6 md:right-6",
+              "md:w-[420px] md:bg-[#F5F6FA] md:rounded-2xl md:shadow-2xl",
+              minimized ? "md:max-h-fit" : "md:max-h-[680px]",
+            ].join(" ")}
+            style={{
+              boxShadow: "0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.06)",
+            }}
           >
-            {/* ── Header — cliquable pour ré-ouvrir si minimisé ── */}
+            {/* ══ HEADER ══ */}
             <div
-              className={`shrink-0 bg-gradient-to-r from-tk-orange to-[#e03500] px-4 py-3.5 flex items-center gap-3 ${minimized ? "cursor-pointer" : ""}`}
+              className={[
+                "shrink-0 bg-gradient-to-r from-tk-orange to-[#e03500]",
+                "flex items-center gap-3 px-4",
+                /* Mobile: safe area top + taller */
+                "pt-[max(env(safe-area-inset-top),16px)] pb-3",
+                /* Desktop: uniform */
+                "md:pt-3.5 md:pb-3.5",
+                minimized ? "cursor-pointer" : "",
+              ].join(" ")}
               onClick={() => minimized && setMinimized(false)}
             >
-              <TKAvatar size={40} />
-              <div className="flex-1 min-w-0">
+              {/* Bouton retour — mobile uniquement, pas en mode minimisé */}
+              {!minimized && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onClose(); }}
+                  className="md:hidden w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors shrink-0"
+                  aria-label="Fermer"
+                >
+                  <ArrowLeft size={18} className="text-white" />
+                </button>
+              )}
+
+              <TKAvatar size={38} />
+
+              <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
                 <p className="font-black text-white text-[15px] leading-tight">
                   Assistant TK Area
                 </p>
@@ -360,64 +383,66 @@ export default function ChatModal({
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                 <a
                   href="tel:0605769952"
                   className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors"
-                  title="Appeler TK Area"
+                  aria-label="Appeler TK Area"
                 >
                   <Phone size={15} className="text-white" />
                 </a>
-                {/* Minimize / Maximize — desktop uniquement */}
+                {/* Minimize/Maximize — desktop uniquement */}
                 <button
                   onClick={() => setMinimized((v) => !v)}
-                  className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 hidden md:flex items-center justify-center transition-colors"
-                  title={minimized ? "Agrandir" : "Réduire"}
+                  className="hidden md:flex w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 items-center justify-center transition-colors"
+                  aria-label={minimized ? "Agrandir" : "Réduire"}
                 >
                   {minimized
                     ? <Maximize2 size={14} className="text-white" />
-                    : <Minimize2 size={14} className="text-white" />
-                  }
+                    : <Minimize2 size={14} className="text-white" />}
                 </button>
+                {/* Close — desktop uniquement */}
                 <button
                   onClick={onClose}
-                  className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors"
-                  title="Fermer"
+                  className="hidden md:flex w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 items-center justify-center transition-colors"
+                  aria-label="Fermer"
                 >
                   <X size={15} className="text-white" />
                 </button>
               </div>
             </div>
 
-            {/* ── Body (masqué si minimisé) ── */}
+            {/* ══ BODY ══ */}
             {!minimized && (
               <>
                 {/* Messages */}
                 <div
                   ref={scrollRef}
                   className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-4 flex flex-col gap-3"
-                  style={{ scrollbarWidth: "none" }}
+                  style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
                 >
                   <AnimatePresence initial={false}>
                     {messages.map((m) => (
                       <MessageBubble key={m.id} message={m} />
                     ))}
                   </AnimatePresence>
-
-                  {/* TypingDots = seul indicateur de chargement initial */}
                   <AnimatePresence>
                     {isWaiting && <TypingDots />}
                   </AnimatePresence>
                 </div>
 
-                {/* Suggestions (seulement au début) */}
+                {/* Suggestions — scroll horizontal sur mobile, wrap sur desktop */}
                 {messages.length === 1 && !loading && (
-                  <div className="shrink-0 px-4 pb-2 flex flex-wrap gap-2">
+                  <div
+                    className="shrink-0 px-4 pb-2 flex gap-2 overflow-x-auto md:flex-wrap"
+                    style={{ scrollbarWidth: "none" }}
+                  >
                     {SUGGESTIONS.map((s) => (
                       <button
                         key={s}
                         onClick={() => sendMessage(s)}
-                        className="text-[12px] font-semibold text-tk-orange bg-tk-orange/8 hover:bg-tk-orange/15 border border-tk-orange/20 rounded-full px-3 py-1.5 transition-colors"
+                        className="shrink-0 text-[12px] font-semibold text-tk-orange bg-tk-orange/8 hover:bg-tk-orange/15 border border-tk-orange/20 rounded-full px-3 py-1.5 transition-colors whitespace-nowrap"
                       >
                         {s}
                       </button>
@@ -426,7 +451,10 @@ export default function ChatModal({
                 )}
 
                 {/* Input bar */}
-                <div className="shrink-0 bg-white border-t border-gray-100 px-3 py-3">
+                <div
+                  className="shrink-0 bg-white border-t border-gray-100 px-3 py-3"
+                  style={{ paddingBottom: "max(env(safe-area-inset-bottom), 12px)" }}
+                >
                   <div className="flex items-end gap-2 bg-gray-50 rounded-2xl border border-gray-200 px-3 py-2 focus-within:border-tk-orange/40 focus-within:ring-2 focus-within:ring-tk-orange/10 transition-all">
                     <textarea
                       ref={inputRef}
@@ -436,9 +464,11 @@ export default function ChatModal({
                       placeholder="Écrivez votre message..."
                       rows={1}
                       disabled={loading}
-                      className="flex-1 min-w-0 bg-transparent text-[14px] text-gray-800 placeholder-gray-400 resize-none outline-none leading-relaxed disabled:opacity-60"
+                      className="flex-1 min-w-0 bg-transparent text-gray-800 placeholder-gray-400 resize-none outline-none leading-relaxed disabled:opacity-60"
                       style={{
-                        maxHeight: 120,
+                        /* 16px minimum évite le zoom iOS sur les inputs */
+                        fontSize: "16px",
+                        maxHeight: 100,
                         scrollbarWidth: "none",
                         fontFamily: "system-ui, sans-serif",
                       }}
@@ -446,13 +476,12 @@ export default function ChatModal({
                     <button
                       onClick={() => sendMessage(input)}
                       disabled={!input.trim() || loading}
-                      className="w-8 h-8 rounded-full bg-tk-orange flex items-center justify-center shrink-0 mb-[1px] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-orange-600 active:scale-95 transition-all"
+                      className="w-9 h-9 rounded-full bg-tk-orange flex items-center justify-center shrink-0 mb-[1px] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-orange-600 active:scale-95 transition-all"
                     >
-                      {loading ? (
-                        <Loader2 size={15} className="text-white animate-spin" />
-                      ) : (
-                        <ArrowUp size={15} className="text-white" strokeWidth={3} />
-                      )}
+                      {loading
+                        ? <Loader2 size={16} className="text-white animate-spin" />
+                        : <ArrowUp size={16} className="text-white" strokeWidth={2.5} />
+                      }
                     </button>
                   </div>
                   <p className="text-center text-[10px] text-gray-400 mt-2 font-medium">
