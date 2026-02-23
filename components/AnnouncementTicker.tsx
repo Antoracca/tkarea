@@ -51,10 +51,10 @@ const announcements: AnnouncementItem[] = [
 ];
 
 const toneStyles: Record<AnnouncementTone, string> = {
-  default: "border-white/20 bg-white/[0.06] text-gray-100",
-  offer: "border-tk-orange/50 bg-tk-orange/15 text-white",
-  urgent: "border-tk-orange/50 bg-tk-orange/20 text-white",
-  service: "border-tk-orange/30 bg-tk-orange/10 text-gray-100",
+  default: "border-white/10 bg-white/5 text-gray-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]",
+  offer: "border-tk-orange/30 bg-tk-orange/20 text-white shadow-[0_0_15px_rgba(255,77,0,0.2)]",
+  urgent: "border-tk-orange/40 bg-gradient-to-r from-tk-orange/20 to-tk-orange-dark/30 text-white shadow-[0_0_15px_rgba(255,77,0,0.3)]",
+  service: "border-tk-orange/20 bg-tk-orange/5 text-gray-200",
 };
 
 export default function AnnouncementTicker() {
@@ -84,21 +84,22 @@ export default function AnnouncementTicker() {
   }, []);
 
   return (
-    <motion.aside
+    <motion.div
       aria-label="Annonces de l'agence"
-      className="fixed left-0 right-0 top-[72px] z-40 md:top-[80px]"
-      initial={false}
+      className="absolute left-0 right-0 top-[88px] z-40 md:top-[96px] w-full"
+      initial={{ opacity: 1, y: 0 }}
       animate={{
-        y: visible ? 0 : -72,
+        y: visible ? 0 : -20,
         opacity: visible ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none"
       }}
-      transition={{ duration: 0.24, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <div className="relative border-y border-white/10 bg-tk-black/95 shadow-[0_14px_28px_rgba(0,0,0,0.35)] backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1600px] items-center gap-2 px-2 py-2 md:gap-3 md:px-5">
-          <div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-tk-orange/50 bg-tk-orange/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-tk-orange md:px-3">
-            <Megaphone size={12} />
-            <span className="hidden sm:inline">Annonces agence</span>
+      <div className="relative border-y md:border border-white/10 bg-tk-black/80 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl md:mx-4 lg:mx-auto md:max-w-7xl md:rounded-full">
+        <div className="flex items-center gap-3 px-3 py-2 md:gap-4 md:px-6">
+          <div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-tk-orange/30 bg-tk-orange/10 px-3 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-[0.14em] text-tk-orange shadow-[0_0_10px_rgba(255,77,0,0.15)]">
+            <Megaphone size={14} className="animate-pulse" />
+            <span className="hidden sm:inline">Annonces Flash</span>
             <span className="sm:hidden">Infos</span>
           </div>
 
@@ -110,10 +111,10 @@ export default function AnnouncementTicker() {
                 reduceMotion
                   ? { duration: 0 }
                   : {
-                      duration: 34,
-                      ease: "linear",
-                      repeat: Infinity,
-                    }
+                    duration: 34,
+                    ease: "linear",
+                    repeat: Infinity,
+                  }
               }
             >
               {items.map((item, index) => {
@@ -125,11 +126,11 @@ export default function AnnouncementTicker() {
                     href={item.href ?? "#contact"}
                     className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition-colors md:px-3 md:py-2 ${toneStyles[tone]}`}
                   >
-                    <Icon size={14} className="shrink-0 opacity-90" />
-                    <span className="hidden text-[10px] font-extrabold uppercase tracking-[0.12em] lg:inline">
+                    <Icon size={14} className="shrink-0 opacity-80" />
+                    <span className="hidden text-[10px] font-black uppercase tracking-[0.15em] lg:inline text-white/90">
                       {item.title}
                     </span>
-                    <span className="whitespace-nowrap text-[11px] md:text-xs">{item.text}</span>
+                    <span className="whitespace-nowrap text-[11px] md:text-xs font-medium tracking-wide">{item.text}</span>
                   </a>
                 );
               })}
@@ -137,6 +138,6 @@ export default function AnnouncementTicker() {
           </div>
         </div>
       </div>
-    </motion.aside>
+    </motion.div>
   );
 }

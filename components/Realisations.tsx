@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Award, CheckCircle2, Download, Eye, MapPin, Maximize2, Phone, TrendingUp, X, Zap } from "lucide-react";
-import { useState } from "react";
+import { AnimatePresence, motion, PanInfo } from "framer-motion";
+import { ArrowRight, Award, CheckCircle2, Download, Eye, MapPin, Maximize2, Phone, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 type PortfolioItem = {
   id: string;
@@ -27,9 +26,9 @@ type FlyerItem = {
 const portfolioItems: PortfolioItem[] = [
   {
     id: "p1",
-    title: "Signalisation complète zone chantier",
+    title: "Signalisation complète de zone",
     category: "Signalisation",
-    image: "/imageposefeusignalisation.png",
+    image: "https://uploads.prod01.london.platform-os.com/instances/700/assets/tiloeduc-20210601.png?updated=1622560935",
     location: "Maine-et-Loire",
     result: "100% Conforme NF",
     description: "Installation rapide avec sécurisation immédiate des usagers",
@@ -39,7 +38,7 @@ const portfolioItems: PortfolioItem[] = [
     id: "p2",
     title: "Marquage au sol haute performance",
     category: "Marquage",
-    image: "/tracageroute.png",
+    image: "https://jhm.fr/wp-content/uploads/2024/08/839210.HR_.jpg",
     location: "Grand Ouest",
     result: "Durabilité 10 ans",
     description: "Traçage routier avec peinture thermoplastique certifiée",
@@ -47,23 +46,13 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: "p3",
-    title: "Aménagement voirie urbaine",
+    title: "Aménagement de voirie urbaine",
     category: "Aménagement",
-    image: "/traveauxbitume.png",
+    image: "https://metropole.toulouse.fr/sites/toulouse-fr/files/styles/facebook/public/2022-11/30-01-18_proprete.jpg.webp?itok=R2Yn7usb",
     location: "Bouchemaine",
     result: "PMR Accessible",
     description: "Réorganisation complète des flux piétons et véhicules",
     size: "medium",
-  },
-  {
-    id: "p4",
-    title: "Flotte mobile intervention urgente",
-    category: "Logistique",
-    image: "/camion2orange.png",
-    location: "Angers",
-    result: "Dispo 24/7",
-    description: "Équipe mobilisable en moins de 2h partout dans le Grand Ouest",
-    size: "small",
   },
 ];
 
@@ -96,169 +85,118 @@ const flyerItems: FlyerItem[] = [
 
 function PortfolioCard({ item }: { item: PortfolioItem }) {
   const sizeClasses = {
-    large: "md:col-span-2 md:row-span-2 aspect-[16/10] md:aspect-[16/11]",
-    medium: "md:col-span-1 md:row-span-1 aspect-[4/3]",
-    small: "md:col-span-1 md:row-span-1 aspect-[4/3]",
+    large: "md:col-span-2 md:row-span-2 aspect-[4/5] sm:aspect-[16/10] md:aspect-[16/11]",
+    medium: "md:col-span-1 md:row-span-1 aspect-[4/5] sm:aspect-[4/3] md:aspect-[4/3]",
+    small: "md:col-span-1 md:row-span-1 aspect-[4/5] sm:aspect-[4/3] md:aspect-[4/3]",
   };
 
   return (
     <motion.article
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -8 }}
-      className={`group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ${
-        sizeClasses[item.size || "medium"]
-      }`}
+      initial={false}
+      // Removed initial opacity for mobile robustness, since Coverflow handles its own opacity
+      className={`group relative overflow-hidden rounded-2xl bg-black shadow-lg hover:shadow-2xl transition-all duration-500 w-full h-full md:h-auto ${sizeClasses[item.size || "medium"]
+        }`}
     >
       {/* Image */}
       <div className="absolute inset-0">
-        <Image
+        <img
           src={item.image}
           alt={item.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-40"
         />
-        {/* Gradient overlay léger */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        {/* Gradient overlay permanent & dynamique au hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
-      {/* Category badge */}
-      <div className="absolute left-4 top-4 rounded-full bg-white/95 backdrop-blur-sm px-4 py-1.5 shadow-lg">
-        <span className="text-xs font-black uppercase tracking-wider text-tk-orange">
+      {/* Category badge - Always visible */}
+      <div className="absolute left-4 top-4 md:left-5 md:top-5 rounded-full bg-white/95 backdrop-blur-sm px-3 md:px-4 py-1.5 shadow-lg z-20">
+        <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-tk-orange">
           {item.category}
         </span>
       </div>
 
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 lg:p-6">
-        <div className="flex items-start justify-between gap-3 mb-2 md:mb-3">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5 mb-1.5">
-              <MapPin size={12} className="text-tk-orange shrink-0" />
-              <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-tk-orange truncate">
-                {item.location}
-              </p>
-            </div>
-            <h3 className="text-base md:text-lg lg:text-xl font-black text-white leading-tight">
-              {item.title}
-            </h3>
+      {/* Content - Cinematic Slide Up Effect (Toujours visible sur mobile, hover sur desktop) */}
+      <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 translate-y-0 md:translate-y-[4.5rem] md:group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 flex flex-col justify-end">
+        <div className="flex items-center gap-1.5 mb-2">
+          <MapPin size={12} className="text-tk-orange shrink-0" />
+          <p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-tk-orange truncate">
+            {item.location}
+          </p>
+        </div>
+
+        <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white leading-tight mb-3">
+          {item.title}
+        </h3>
+
+        {/* Détails cachés qui remontent */}
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+          <p className="text-xs md:text-sm text-gray-300 mb-4 leading-relaxed line-clamp-2">
+            {item.description}
+          </p>
+
+          <div className="inline-flex items-center gap-1.5 md:gap-2 rounded-full bg-tk-orange px-3 md:px-4 py-1.5 md:py-2 shadow-lg w-fit">
+            <CheckCircle2 size={12} className="text-white shrink-0" />
+            <span className="text-[10px] md:text-xs font-bold text-white whitespace-nowrap">{item.result}</span>
           </div>
         </div>
-
-        <p className="text-xs md:text-sm text-gray-200 mb-2.5 md:mb-3 leading-relaxed line-clamp-2">
-          {item.description}
-        </p>
-
-        <div className="inline-flex items-center gap-1.5 md:gap-2 rounded-full bg-tk-orange px-3 md:px-4 py-1.5 md:py-2 shadow-lg">
-          <CheckCircle2 size={12} className="text-white shrink-0" />
-          <span className="text-[10px] md:text-xs font-bold text-white whitespace-nowrap">{item.result}</span>
-        </div>
       </div>
-
-      {/* Hover icon */}
-      <motion.div
-        className="absolute right-4 top-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-        whileHover={{ scale: 1.1 }}
-      >
-        <Eye size={18} className="text-tk-orange" />
-      </motion.div>
     </motion.article>
   );
 }
 
 function FlyerCard({ item, onClick }: { item: FlyerItem; onClick: () => void }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="group relative"
+      className="group flex flex-col items-center gap-5"
     >
-      {/* Card container avec effet 3D */}
-      <div className="relative rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500">
-
-        {/* Mockup image avec effet 3D */}
-        <motion.div
-          className="relative aspect-[5/7] rounded-xl overflow-hidden shadow-2xl bg-gray-50"
-          whileHover={{ scale: 1.02, rotateY: 2, rotateX: -2 }}
-          transition={{ duration: 0.3 }}
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <div className="relative w-full h-full flex items-center justify-center p-2">
-            <div className="relative w-full h-full scale-110">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 40vw"
-                priority={true}
-                loading="eager"
-                quality={95}
-              />
-            </div>
-          </div>
-
-          {/* Overlay avec bouton zoom */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-            <motion.button
-              onClick={onClick}
-              className="opacity-0 group-hover:opacity-100 bg-white rounded-full p-4 shadow-2xl"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Maximize2 size={24} className="text-tk-orange" />
-            </motion.button>
-          </div>
-        </motion.div>
-
-        {/* Info */}
-        <div className="mt-6">
-          <h3 className="text-xl md:text-2xl font-black text-tk-black mb-2">
-            {item.title}
-          </h3>
-          <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-            {item.description}
-          </p>
-
-          {/* Details */}
-          <div className="space-y-2 mb-5">
-            {item.details.map((detail, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-xs text-gray-700">
-                <div className="w-1.5 h-1.5 rounded-full bg-tk-orange" />
-                <span className="font-medium">{detail}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Actions */}
-          <div className="flex gap-3">
-            <motion.button
-              onClick={onClick}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-tk-orange text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Eye size={16} />
-              Voir en détail
-            </motion.button>
-            <motion.a
-              href={item.image}
-              download={`TK-AREA-${item.title.replace(/\s+/g, '-')}.jpg`}
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-tk-orange text-tk-orange rounded-xl font-bold text-sm hover:bg-tk-orange hover:text-white transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Download size={16} />
-            </motion.a>
+      {/* Image directe sans card */}
+      <motion.div
+        className="relative w-full max-w-xs mx-auto rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+        whileHover={{ scale: 1.03, rotateY: 2 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ duration: 0.3 }}
+        onClick={onClick}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-auto object-contain"
+        />
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center rounded-2xl">
+          <div className="opacity-0 group-hover:opacity-100 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-xl transition-opacity duration-300">
+            <Maximize2 size={22} className="text-tk-orange" />
           </div>
         </div>
+      </motion.div>
+
+      {/* Titre + download sous l'image */}
+      <div className="text-center">
+        <h3 className="text-base font-black text-tk-black mb-1">{item.title}</h3>
+        <p className="text-xs text-gray-500 mb-3 max-w-[220px] mx-auto">{item.description}</p>
+        <div className="flex items-center justify-center gap-3">
+          <button
+            onClick={onClick}
+            className="flex items-center gap-1.5 px-4 py-2 bg-tk-orange text-white rounded-full font-bold text-xs hover:shadow-lg transition-all"
+          >
+            <Eye size={13} />
+            Voir
+          </button>
+          <a
+            href={item.image}
+            download={`TK-AREA-${item.title.replace(/\s+/g, '-')}.jpg`}
+            className="flex items-center gap-1.5 px-4 py-2 border border-tk-orange text-tk-orange rounded-full font-bold text-xs hover:bg-tk-orange hover:text-white transition-all"
+          >
+            <Download size={13} />
+            PDF
+          </a>
+        </div>
       </div>
-    </motion.article>
+    </motion.div>
   );
 }
 
@@ -295,15 +233,10 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
           {/* Image fullscreen - Scrollable */}
           <div className="relative w-full bg-white overflow-auto max-h-[70vh] md:max-h-[75vh]">
             <div className="relative w-full min-h-[500px] p-4 md:p-8">
-              <Image
+              <img
                 src={item.image}
                 alt={item.title}
-                width={800}
-                height={1200}
                 className="w-full h-auto object-contain"
-                priority
-                loading="eager"
-                quality={100}
               />
             </div>
           </div>
@@ -336,12 +269,20 @@ function FlyerModal({ item, onClose }: { item: FlyerItem | null; onClose: () => 
 export default function Realisations() {
   const [activeView, setActiveView] = useState<"portfolio" | "flyers">("portfolio");
   const [selectedFlyer, setSelectedFlyer] = useState<FlyerItem | null>(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  const stats = [
-    { icon: Award, value: "100+", label: "Projets réalisés" },
-    { icon: TrendingUp, value: "100%", label: "Conformité NF" },
-    { icon: Zap, value: "24/7", label: "Disponibilité" },
-  ];
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setMounted(true); }, []);
+
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipe = info.offset.x;
+    if (swipe < -50 && mobileIndex < portfolioItems.length - 1) {
+      setMobileIndex((prev) => prev + 1);
+    } else if (swipe > 50 && mobileIndex > 0) {
+      setMobileIndex((prev) => prev - 1);
+    }
+  };
 
   return (
     <section id="realisations" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-24 md:py-32 overflow-hidden">
@@ -371,9 +312,9 @@ export default function Realisations() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-tk-black mb-6 leading-tight">
-            Nos <span className="text-tk-orange">Réalisations</span>
+            Interventions <span className="text-tk-orange">Types</span>
             <br />
-            <span className="text-gray-500">qui parlent d'elles-mêmes</span>
+            <span className="text-gray-500">en attendant les vôtres</span>
           </h2>
 
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
@@ -381,105 +322,120 @@ export default function Realisations() {
           </p>
         </motion.div>
 
-        {/* Stats */}
+        {/* Toggle Switcher iOS Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-3 gap-3 md:gap-6 mb-12 max-w-3xl mx-auto"
+          className="flex justify-center mb-12"
         >
-          {stats.map((stat, idx) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white rounded-xl md:rounded-2xl p-3 md:p-5 lg:p-6 shadow-lg hover:shadow-2xl text-center transition-shadow"
-                whileHover={{ y: -4 }}
-              >
-                <Icon size={20} className="text-tk-orange mx-auto mb-2 md:mb-3" />
-                <div className="text-xl md:text-3xl lg:text-4xl font-black text-tk-black mb-1 leading-tight">
-                  {stat.value}
-                </div>
-                <div className="text-[9px] md:text-xs lg:text-sm font-bold text-gray-600 uppercase tracking-wider leading-tight">
-                  {stat.label}
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Toggle buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex justify-center gap-4 mb-12"
-        >
-          <motion.button
-            onClick={() => setActiveView("portfolio")}
-            className={`px-8 py-4 rounded-xl font-black uppercase tracking-wider text-sm transition-all ${
-              activeView === "portfolio"
-                ? "bg-tk-orange text-white shadow-xl shadow-tk-orange/30"
-                : "bg-white text-gray-600 hover:bg-gray-100"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Portfolio Terrain
-          </motion.button>
-          <motion.button
-            onClick={() => setActiveView("flyers")}
-            className={`px-8 py-4 rounded-xl font-black uppercase tracking-wider text-sm transition-all ${
-              activeView === "flyers"
-                ? "bg-tk-orange text-white shadow-xl shadow-tk-orange/30"
-                : "bg-white text-gray-600 hover:bg-gray-100"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Plaquettes & Flyers
-          </motion.button>
+          <div className="relative flex items-center p-1.5 bg-gray-100/80 backdrop-blur-md rounded-full shadow-inner border border-gray-200/50">
+            {/* Pilule coulissante */}
+            <motion.div
+              className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
+              animate={{ x: activeView === "portfolio" ? 0 : "100%" }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            />
+            {/* Boutons invisibles par-dessus */}
+            <button
+              onClick={() => setActiveView("portfolio")}
+              className={`relative z-10 px-4 sm:px-8 py-3.5 font-black uppercase tracking-wider text-[10px] sm:text-sm transition-colors duration-300 w-40 sm:w-48 text-center ${activeView === "portfolio" ? "text-tk-orange" : "text-gray-500 hover:text-gray-900"
+                }`}
+            >
+              Sur le terrain
+            </button>
+            <button
+              onClick={() => setActiveView("flyers")}
+              className={`relative z-10 px-4 sm:px-8 py-3.5 font-black uppercase tracking-wider text-[10px] sm:text-sm transition-colors duration-300 w-40 sm:w-48 text-center ${activeView === "flyers" ? "text-tk-orange" : "text-gray-500 hover:text-gray-900"
+                }`}
+            >
+              Plaquettes
+            </button>
+          </div>
         </motion.div>
 
         {/* Content */}
-        <AnimatePresence mode="wait">
-          {activeView === "portfolio" ? (
-            <motion.div
-              key="portfolio"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-fr"
-            >
-              {portfolioItems.map((item) => (
-                <PortfolioCard key={item.id} item={item} />
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="flyers"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
-                {flyerItems.map((item) => (
-                  <FlyerCard
-                    key={item.id}
-                    item={item}
-                    onClick={() => setSelectedFlyer(item)}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {mounted && (
+          <AnimatePresence mode="wait">
+            {activeView === "portfolio" ? (
+              <motion.div
+                key="portfolio"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="relative w-full"
+              >
+                {/* Desktop Grid View */}
+                <div
+                  className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
+                >
+                  {portfolioItems.map((item) => (
+                    <PortfolioCard key={item.id} item={item} />
+                  ))}
+                </div>
+
+                {/* Mobile 3D Coverflow View */}
+                <div
+                  className="relative w-full h-[60vh] md:hidden flex items-center justify-center"
+                  style={{ perspective: "1200px" }}
+                >
+                  {portfolioItems.map((item, index) => {
+                    const isCenter = index === mobileIndex;
+                    const isLeft = index < mobileIndex;
+                    const offset = index - mobileIndex;
+                    const isVisible = Math.abs(offset) <= 1;
+
+                    return (
+                      <motion.div
+                        key={item.id}
+                        className="absolute w-[72vw] aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.35),_0_0_0_2px_rgba(255,255,255,0.05)] bg-black cursor-grab active:cursor-grabbing"
+                        initial={false}
+                        animate={{
+                          x: offset * 45, // Shift in pixels
+                          y: !isCenter ? 15 : 0, // Push side cards down slightly
+                          scale: isCenter ? 1 : 0.85,
+                          rotateY: isCenter ? 0 : isLeft ? 35 : -35,
+                          zIndex: isCenter ? 30 : 20 - Math.abs(offset),
+                          opacity: isVisible ? (isCenter ? 1 : 0.4) : 0,
+                        }}
+                        transition={{ type: "spring", stiffness: 250, damping: 25 }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.1}
+                        onDragEnd={handleDragEnd}
+                        onClick={() => setMobileIndex(index)}
+                        style={{ pointerEvents: isVisible ? "auto" : "none" }}
+                      >
+                        <div className="absolute inset-0 w-full h-full">
+                          <PortfolioCard item={item} />
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="flyers"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-3xl mx-auto">
+                  {flyerItems.map((item) => (
+                    <FlyerCard
+                      key={item.id}
+                      item={item}
+                      onClick={() => setSelectedFlyer(item)}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        )}
 
         {/* CTA Section */}
         <motion.div
@@ -492,7 +448,7 @@ export default function Realisations() {
             Prêt à démarrer votre projet ?
           </h3>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Contactez-nous pour un devis gratuit sous 24h ou une intervention d'urgence
+            Contactez-nous pour un devis gratuit sous 24h ou une intervention d&apos;urgence
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
@@ -518,7 +474,7 @@ export default function Realisations() {
       </div>
 
       {/* Flyer Modal */}
-      {selectedFlyer && (
+      {mounted && selectedFlyer && (
         <FlyerModal item={selectedFlyer} onClose={() => setSelectedFlyer(null)} />
       )}
     </section>

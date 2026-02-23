@@ -51,63 +51,68 @@ export default function Navbar() {
 
   return (
     <>
-      {/* NAVBAR - Toujours visible, change juste de couleur */}
+      {/* NAVBAR - Floating Glass Pill Design on scroll */}
       <motion.nav
         className={`
-          fixed top-0 left-0 right-0 z-50 transition-all duration-500
+          fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out
           ${isScrolled
-            ? 'glass-dark shadow-2xl py-3 md:py-4'
-            : 'bg-transparent py-4 md:py-6'
+            ? 'top-4 md:top-6 w-[96%] max-w-7xl rounded-full bg-[#0a0a0c]/70 backdrop-blur-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 py-2.5 md:py-3 px-5 md:px-8'
+            : 'top-0 w-full bg-gradient-to-b from-black/80 via-black/30 to-transparent py-4 md:py-8 px-5 md:px-8 border-none backdrop-blur-none shadow-none'
           }
         `}
       >
-        <div className="container-custom">
+        <div className="w-full">
           <div className="flex items-center justify-between">
 
             {/* LOGO + MARQUE */}
-            <Link href="/" className="relative z-50 flex items-center gap-4">
+            <Link href="/" className="relative z-50 flex items-center gap-4 group">
               {/* Logo */}
-              <motion.img
-                src="/logo1.png"
-                alt="TK ARÉA"
-                className="object-contain drop-shadow-2xl"
-                style={{
-                  height: isScrolled ? '48px' : '64px',
-                  width: isScrolled ? '48px' : '64px',
-                }}
-                animate={{
-                  height: isScrolled ? '48px' : '64px',
-                  width: isScrolled ? '48px' : '64px',
-                }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              />
+              <div className="relative">
+                <div className={`absolute inset-0 bg-tk-orange/30 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-full ${isScrolled ? 'h-10 w-10' : 'h-16 w-16'}`} />
+                <motion.img
+                  src="/logo1.png"
+                  alt="TK ARÉA"
+                  className="relative z-10 object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+                  style={{
+                    height: isScrolled ? '44px' : '64px',
+                    width: isScrolled ? '44px' : '64px',
+                  }}
+                  animate={{
+                    height: isScrolled ? '44px' : '64px',
+                    width: isScrolled ? '44px' : '64px',
+                  }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                />
+              </div>
 
               {/* Texte TK AREA */}
-              <div className="flex flex-col leading-none">
+              <div className="flex flex-col leading-tight">
                 <motion.span
                   className="font-black uppercase tracking-tighter text-white"
                   style={{
-                    fontSize: isScrolled ? '1.5rem' : '2rem',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                    fontSize: isScrolled ? '1.4rem' : '1.8rem',
+                    textShadow: '0 4px 15px rgba(0,0,0,0.8)',
                   }}
                   animate={{
-                    fontSize: isScrolled ? '1.5rem' : '2rem',
+                    fontSize: isScrolled ? '1.4rem' : '1.8rem',
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="text-white">TK</span>
-                  <span className="text-tk-orange"> AREA</span>
+                  <span className="text-white drop-shadow-lg">TK</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-tk-orange to-orange-400 drop-shadow-[0_0_10px_rgba(255,77,0,0.4)]"> AREA</span>
                 </motion.span>
-                <motion.span
-                  className="text-[10px] text-gray-400 uppercase tracking-widest font-bold"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: isScrolled ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Aménagement Urbain
-                </motion.span>
+                <div className="overflow-hidden">
+                  <motion.span
+                    className="block text-[10px] text-gray-300 uppercase tracking-[0.2em] font-bold drop-shadow-md"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: isScrolled ? 1 : 0, height: isScrolled ? 'auto' : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    Aménagement Urbain
+                  </motion.span>
+                </div>
               </div>
             </Link>
 
@@ -123,195 +128,195 @@ export default function Navbar() {
                   >
                     <span
                       className={`
-                        text-sm font-bold uppercase tracking-wider transition-all duration-300
+                        text-[13px] font-black uppercase tracking-[0.15em] transition-all duration-300
                         ${isActive
-                          ? 'text-tk-orange drop-shadow-lg'
-                          : 'text-white hover:text-tk-orange-light'
+                          ? 'text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]'
+                          : 'text-gray-400 hover:text-white drop-shadow-[0_0_8px_rgba(255,255,255,0)] group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'
                         }
                       `}
                     >
                       {item.label}
                     </span>
 
-                    {/* Underline animé */}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 rounded-full"
-                      style={{ backgroundColor: '#FF4D00' }}
-                      initial={{ width: 0 }}
-                      animate={{ width: isActive ? "100%" : 0 }}
-                      whileHover={{ width: "100%" }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    />
+                    {/* Ligne Glow active/hover */}
+                    <div className="absolute -bottom-1 left-0 right-0 h-[2px] overflow-hidden flex justify-center">
+                      <motion.div
+                        className="h-full rounded-full bg-tk-orange shadow-[0_0_10px_rgba(255,77,0,1)]"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{
+                          width: isActive ? "80%" : 0,
+                          opacity: isActive ? 1 : 0
+                        }}
+                        whileHover={{ width: "100%", opacity: 1 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                      />
+                    </div>
                   </Link>
                 );
               })}
 
-              {/* CTA Button - Urgence */}
+              {/* CTA Button Premium - Urgence */}
               <motion.a
                 href="tel:0605769952"
                 className="
-                  relative flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm
-                  uppercase tracking-wider overflow-hidden group
-                  border-2 border-white text-white
+                  relative flex items-center gap-3 px-6 py-2.5 rounded-full font-black text-xs
+                  uppercase tracking-widest overflow-hidden group border border-tk-orange/50 
+                  bg-gradient-to-r from-tk-orange/10 to-transparent text-white backdrop-blur-sm
+                  shadow-[0_0_20px_rgba(255,77,0,0.15)] hover:shadow-[0_0_30px_rgba(255,77,0,0.4)] transition-all
                 "
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Phone size={18} className="relative z-10" />
-                <span className="relative z-10 transition-colors duration-300">
+                {/* Effet Scanner Lumineux */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-tk-orange/40 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
+
+                {/* Fond plein qui apparait au hover */}
+                <div className="absolute inset-0 bg-tk-orange opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                <div className="relative z-10 bg-tk-orange/20 group-hover:bg-white/20 p-1.5 rounded-full transition-colors duration-300">
+                  <Phone size={14} className="text-tk-orange group-hover:text-white transition-colors duration-300" />
+                </div>
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-white mt-0.5">
                   Urgence 24/7
                 </span>
-
-                {/* Hover background orange */}
-                <motion.div
-                  className="absolute inset-0"
-                  style={{ backgroundColor: '#FF4D00' }}
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
               </motion.a>
             </div>
 
-            {/* MOBILE MENU TOGGLE */}
+            {/* MOBILE MENU TOGGLE PREMIUM */}
             <motion.button
               onClick={() => setIsOpen(true)}
-              className="lg:hidden relative z-50 p-2 text-white"
+              className="lg:hidden relative z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white backdrop-blur-md"
               aria-label="Ouvrir le menu"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Menu size={28} strokeWidth={2} />
+              <Menu size={22} strokeWidth={2.5} className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
             </motion.button>
           </div>
         </div>
-
-        {/* Gradient border bottom (visible quand scrolled) */}
-        {isScrolled && (
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 h-px"
-            style={{
-              background: 'linear-gradient(90deg, transparent, rgba(255,77,0,0.5), transparent)'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          />
-        )}
       </motion.nav>
 
-      {/* MOBILE MENU - Full screen */}
+      {/* MOBILE MENU - GLASSMORPHISM PROFOND */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop blur */}
+            {/* Backdrop extra flou avec gradient vignette */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+              transition={{ duration: 0.4 }}
+              className="fixed inset-0 z-50 bg-[#000000]/40 backdrop-blur-2xl"
               onClick={() => setIsOpen(false)}
-            />
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(255,77,0,0.15),transparent_50%)]" />
+            </motion.div>
 
-            {/* Menu panel */}
+            {/* Menu panel - Slide depuis la droite en mode Glass Dark */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-md"
-              style={{ background: '#FF4D00' }}
+              transition={{ type: "spring", stiffness: 250, damping: 25 }}
+              className="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-sm border-l border-white/10 bg-[#0a0a0c]/80 backdrop-blur-3xl shadow-[-20px_0_60px_rgba(0,0,0,0.8)]"
             >
-              <div className="h-full flex flex-col p-8">
+              {/* Halos internes */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-tk-orange/20 rounded-full blur-[100px] pointer-events-none" />
 
-                {/* Header */}
-                <div className="flex items-center justify-between mb-16">
+              <div className="h-full flex flex-col p-8 relative z-10">
+                {/* Header Mobile */}
+                <div className="flex items-center justify-between mb-12 border-b border-white/10 pb-6">
                   {/* Logo + Marque */}
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <motion.img
                       src="/logo1.png"
                       alt="TK ARÉA"
-                      className="h-14 w-14 object-contain"
-                      initial={{ scale: 0, rotate: -180 }}
+                      className="h-12 w-12 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                      initial={{ scale: 0, rotate: -45 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ delay: 0.2, type: "spring" }}
                     />
-                    <div className="flex flex-col leading-none">
-                      <span className="text-2xl font-black uppercase tracking-tighter text-white">
-                        TK <span className="text-tk-black">AREA</span>
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-xl font-black uppercase tracking-tighter text-white drop-shadow-lg">
+                        TK <span className="text-transparent bg-clip-text bg-gradient-to-r from-tk-orange to-orange-400">AREA</span>
                       </span>
                     </div>
                   </div>
 
                   <motion.button
                     onClick={() => setIsOpen(false)}
-                    className="p-2 text-white"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-tk-orange hover:bg-white/10 transition-colors"
                     whileHover={{ scale: 1.1, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.1 }}
                   >
-                    <X size={32} strokeWidth={2.5} />
+                    <X size={20} strokeWidth={2.5} />
                   </motion.button>
                 </div>
 
-                {/* Navigation links */}
-                <nav className="flex-1 flex flex-col gap-2">
+                {/* Navigation links Mobile */}
+                <nav className="flex-1 flex flex-col gap-6 pt-4">
                   {menuItems.map((item, index) => (
                     <motion.a
                       key={item.href}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="
-                        text-5xl font-black uppercase tracking-tight text-white
-                        py-4 border-b border-white/20
-                        hover:pl-4 transition-all duration-300
-                      "
-                      initial={{ opacity: 0, x: 50 }}
+                      className="group flex items-center justify-between text-3xl font-black uppercase tracking-tight text-gray-400 transition-colors hover:text-white"
+                      initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{
                         delay: 0.1 + (index * 0.1),
                         type: "spring",
-                        stiffness: 100
+                        stiffness: 150
                       }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
                     >
-                      {item.label}
+                      <span className="relative">
+                        {item.label}
+                        <span className="absolute -bottom-2 left-0 w-0 h-1 rounded-full bg-tk-orange transition-all duration-300 group-hover:w-1/2 shadow-[0_0_10px_rgba(255,77,0,0.8)]" />
+                      </span>
+                      <span className="text-tk-orange opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                        →
+                      </span>
                     </motion.a>
                   ))}
                 </nav>
 
-                {/* CTA urgent */}
-                <motion.a
-                  href="tel:0605769952"
-                  className="
-                    flex items-center justify-center gap-3
-                    bg-white text-tk-orange py-5 rounded-2xl
-                    font-bold text-lg uppercase tracking-wider
-                    shadow-2xl
-                  "
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  whileHover={{ scale: 1.02, boxShadow: "0 30px 60px -12px rgba(0,0,0,0.3)" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Phone size={24} />
-                  Urgence 24/7
-                </motion.a>
+                {/* Call To Action Mobile Premium */}
+                <div className="mt-8 mb-4">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-4 px-2">Besoin d'une intervention rapide ?</p>
+                  <motion.a
+                    href="tel:0605769952"
+                    className="
+                      relative flex items-center justify-center gap-3
+                      bg-gradient-to-br from-tk-orange to-[#cc3d00] py-4 rounded-2xl
+                      font-black text-sm text-white uppercase tracking-widest
+                      shadow-[0_15px_30px_rgba(255,77,0,0.3)]
+                      overflow-hidden border border-tk-orange/50
+                    "
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="absolute inset-0 bg-white/20 -translate-y-full transition-transform duration-500 hover:translate-y-0" />
+                    <Phone size={18} className="relative z-10" />
+                    <span className="relative z-10 mt-0.5 mt-0.5">Urgence 24/7</span>
+                  </motion.a>
+                </div>
 
-                {/* Footer */}
+                {/* Footer Mobile */}
                 <motion.div
-                  className="mt-8 pt-6 border-t border-white/20 flex items-center justify-between text-white text-sm"
+                  className="pt-6 flex items-center justify-center text-gray-500 text-[10px] font-medium tracking-widest uppercase gap-2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <span className="font-mono">© 2026 TK ARÉA</span>
-                  <span className="font-mono">FRANCE</span>
+                  <span className="text-white">TK ARÉA</span>
+                  <span>•</span>
+                  <span>Opérationnel France</span>
                 </motion.div>
               </div>
             </motion.div>

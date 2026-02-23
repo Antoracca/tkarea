@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
+import Providers from "@/components/Providers";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "700", "800"], variable: '--font-syne' });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["300", "500", "700"], variable: '--font-space' });
@@ -76,7 +77,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className={`${syne.variable} ${spaceGrotesk.variable} bg-tk-light text-tk-black antialiased selection:bg-tk-orange selection:text-white w-full overflow-x-hidden`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,16 +1,15 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Ruler, SignpostBig, Trees } from "lucide-react";
-import { useRef } from "react";
-import Image from "next/image";
+import { ArrowUpRight, PaintRoller, TriangleAlert, Building2 } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
 const services = [
   {
     id: "01",
     title: "MARQUAGE AU SOL",
     slug: "marquage",
-    icon: Ruler,
+    icon: PaintRoller,
     description: "Traçage routier, industriel et sportif haute performance avec matériel de dernière génération.",
     features: [
       "Marquage routier conforme NF",
@@ -18,14 +17,20 @@ const services = [
       "Terrains de sport",
       "Peintures thermoplastiques"
     ],
-    image: "/actiontech.png",
-    color: "#FF4D00"
+    images: [
+      "https://jhm.fr/wp-content/uploads/2024/08/839210.HR_.jpg",
+      "https://www.groupe-helios.com/wp-content/uploads/2024/12/imaginer-les-mobilites-de-demain-spraygrip-marquage-urbain-marquage-au-sol-2.jpg",
+      "https://www.ste-lsp.com/wp-content/uploads/2023/05/photo-7-1.jpg"
+    ],
+    color: "#FF4D00",
+    statValue: "100%",
+    statLabel: "Conformité NF"
   },
   {
     id: "02",
     title: "SIGNALISATION",
     slug: "signalisation",
-    icon: SignpostBig,
+    icon: TriangleAlert,
     description: "Panneaux, balises et mâts conformes aux normes NF pour une sécurité optimale.",
     features: [
       "Panneaux verticaux",
@@ -33,14 +38,20 @@ const services = [
       "Mâts certifiés",
       "Signalisation temporaire"
     ],
-    image: "/imageposefeusignalisation.png",
-    color: "#FF6B2C"
+    images: [
+      "https://inforisque.fr/fiches-pratiques/images/signaletique-projetee-top.jpg",
+      "https://www.signaletique-express.fr/img/psblog/b/lg-b-definition-de-la-signaletique.png",
+      "https://m3.direct-signaletique.com/img/cms/securit%C3%A9.jpg"
+    ],
+    color: "#FF6B2C",
+    statValue: "24/7",
+    statLabel: "Mise en sécurité"
   },
   {
     id: "03",
     title: "AMÉNAGEMENT URBAIN",
     slug: "amenagement",
-    icon: Trees,
+    icon: Building2,
     description: "Mobilier urbain, sécurisation piétonne et solutions d'accessibilité PMR.",
     features: [
       "Mobilier urbain design",
@@ -48,20 +59,45 @@ const services = [
       "Aménagements PMR",
       "Bornes de protection"
     ],
-    image: "/traveauxbitume.png",
-    color: "#FFB366"
+    images: [
+      "https://metropole.toulouse.fr/sites/toulouse-fr/files/styles/facebook/public/2022-11/30-01-18_proprete.jpg.webp?itok=R2Yn7usb",
+      "https://www.mairie-lognes.fr/medias/2019/08/ST.jpg",
+      "https://pro.choisirmonmetier-paysdelaloire.fr/documents/imagesROME/img_metier_K2303.jpg",
+      "https://www.sepur.com/wp-content/webpc-passthru.php?src=https://www.sepur.com/wp-content/uploads/2022/03/pu-plateau00016-scaled.jpg&nocache=1",
+      "https://khelcombusiness.com/wp-content/uploads/2019/09/photoralentisseur-pourvoiesprivees.jpg"
+    ],
+    color: "#FFB366",
+    statValue: "PMR",
+    statLabel: "Accessibilité totale"
   }
 ];
 
 function ServiceItem({ service, index }: { service: typeof services[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (service.images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % service.images.length);
+    }, 4000); // Change image every 4 seconds
+    return () => clearInterval(interval);
+  }, [service.images.length]);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
 
+  const imgRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: imgProgress } = useScroll({
+    target: imgRef,
+    offset: ["start end", "end start"]
+  });
+
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const imageY = useTransform(imgProgress, [0, 1], ["-2%", "2%"]);
 
   const isEven = index % 2 === 0;
   const Icon = service.icon;
@@ -81,11 +117,22 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className={isEven ? '' : 'lg:col-start-2'}
+            className={`relative ${isEven ? '' : 'lg:col-start-2'}`}
           >
+            {/* Ambient Glow behind text for better separation / premium feel */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full blur-[100px] -z-10 pointer-events-none opacity-[0.15]"
+              style={{ backgroundColor: service.color }}
+            />
             {/* Giant number background */}
-            <div className="absolute -top-10 md:-top-20 left-0 text-[150px] md:text-[250px] font-black text-tk-orange/5 leading-none pointer-events-none select-none">
-              {service.id}
+            <div className="absolute -top-10 md:-top-20 left-0 text-[150px] md:text-[250px] font-black leading-none pointer-events-none select-none -z-10">
+              <span style={{
+                WebkitTextFillColor: "transparent",
+                WebkitBackgroundClip: "text",
+                backgroundImage: `linear-gradient(to bottom, ${service.color}25, transparent)`
+              }}>
+                {service.id}
+              </span>
             </div>
 
             {/* Icon badge */}
@@ -116,7 +163,7 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
             </p>
 
             {/* Features grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-8">
               {service.features.map((feature, idx) => (
                 <motion.div
                   key={idx}
@@ -124,13 +171,19 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-2"
+                  whileHover={{ x: 8 }}
+                  className="flex items-start gap-3 group cursor-default"
                 >
                   <div
-                    className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
-                    style={{ backgroundColor: service.color }}
+                    className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0 transition-transform duration-300 group-hover:scale-[1.5]"
+                    style={{
+                      backgroundColor: service.color,
+                      boxShadow: `0 0 12px ${service.color}`
+                    }}
                   />
-                  <span className="text-sm text-gray-700 font-medium">{feature}</span>
+                  <span className="text-sm text-gray-700 font-medium group-hover:text-tk-black transition-colors duration-300">
+                    {feature}
+                  </span>
                 </motion.div>
               ))}
             </div>
@@ -167,15 +220,54 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
               className="relative"
             >
               {/* Main image container */}
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl group">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-transparent" />
+              <div ref={imgRef} className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.15)] group w-full bg-tk-black/5">
+                <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-full flex items-center justify-center">
+                  {service.images.map((imgUrl, idx) => {
+                    const isSignalisation = service.slug === "signalisation";
+
+                    if (!isSignalisation) {
+                      // Original cover behavior requested for Marquage
+                      return (
+                        <motion.img
+                          key={`${service.slug}-${idx}`}
+                          src={imgUrl}
+                          alt={`${service.title} - Image ${idx + 1}`}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: currentImageIndex === idx ? 1 : 0 }}
+                          transition={{ duration: 1 }}
+                        />
+                      );
+                    }
+
+                    // New padded/blurred behavior strictly localized to Signalisation
+                    return (
+                      <motion.div
+                        key={`${service.slug}-${idx}`}
+                        className="absolute inset-0 w-full h-full overflow-hidden rounded-3xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: currentImageIndex === idx ? 1 : 0 }}
+                        transition={{ duration: 1 }}
+                      >
+                        {/* Fond flouté pour remplir le cadre colorimétriquement sans marges blanches */}
+                        <img
+                          src={imgUrl}
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-50 scale-125"
+                        />
+
+                        {/* Image principale dézoomée, affichée entièrement au centre */}
+                        <img
+                          src={imgUrl}
+                          alt={`${service.title} - Image ${idx + 1}`}
+                          className="absolute inset-0 w-full h-full object-contain p-2 md:p-6 drop-shadow-2xl transition-transform duration-1000 group-hover:scale-[1.03]"
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+                {/* Subtle dark overlay for contrast */}
+                <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Floating geometric shape */}
@@ -220,20 +312,20 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
                 }}
               />
 
-              {/* Stats badge floating */}
+              {/* Stats badge floating - Glassmorphism (Plus petit et plus bas) */}
               <motion.div
-                className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-5 md:p-6 shadow-2xl"
+                className="absolute -bottom-8 -right-4 md:-bottom-12 md:-right-4 scale-90 md:scale-75 origin-bottom-right backdrop-blur-xl bg-white/85 border border-white/40 rounded-2xl p-5 md:p-6 shadow-[0_20px_40px_rgba(0,0,0,0.12)] z-10"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -5, scale: 0.95 }}
               >
                 <div className="text-3xl md:text-4xl font-black" style={{ color: service.color }}>
-                  100%
+                  {service.statValue}
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-600 font-bold">
-                  Conformité NF
+                <div className="text-xs uppercase tracking-wider text-gray-700 font-bold mt-1 max-w-[120px]">
+                  {service.statLabel}
                 </div>
               </motion.div>
             </motion.div>
@@ -331,7 +423,33 @@ export default function Services() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white z-10" />
+      {/* Transition éclatante vers À Propos */}
+      {/* Léger fond grisé pour que l'éclat blanc et pur ressorte mieux */}
+      <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-b from-transparent to-black/5 pointer-events-none" />
+
+      <div className="absolute bottom-0 left-0 right-0 w-full z-10 pointer-events-none">
+        <div className="relative w-full h-[100px] md:h-[180px] overflow-visible flex items-end justify-center">
+          {/* L'éclat blanc (Halo lumineux géant vibrant) */}
+          <motion.div
+            animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-10 left-1/2 -translate-x-1/2 w-[800px] md:w-[1200px] h-[300px] bg-white blur-[50px] rounded-[100%] z-0"
+          />
+          {/* Transition wave in About's background color (#f3f6fb) */}
+          <svg
+            className="relative block w-full h-[60px] md:h-[120px] z-10"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C75.29,32.74,159.27,47.28,242,50.8,268.62,51.92,295.12,54.77,321.39,56.44Z"
+              fill="#f3f6fb"
+              className="drop-shadow-[0_-15px_30px_rgba(255,255,255,1)]"
+            />
+          </svg>
+        </div>
+      </div>
     </section>
   );
 }

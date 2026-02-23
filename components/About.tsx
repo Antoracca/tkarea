@@ -2,46 +2,46 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Sparkles, Workflow } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Award, Workflow } from "lucide-react";
 import { useRef } from "react";
 
-const trustedBy = ["Collectivites", "BTP", "Industrie", "Logistique", "Immobilier", "Voirie"];
+const trustedBy = ["Collectivités", "BTP", "Industrie", "Logistique", "Immobilier", "Voirie"];
 
 const quickStats = [
-  { value: "10+", label: "ans experience" },
+  { value: "10+", label: "ans d'expérience" },
   { value: "24/7", label: "support terrain" },
-  { value: "100%", label: "conformite suivie" },
+  { value: "100%", label: "conformité suivie" },
 ];
 
 const highlights = [
   {
     icon: ShieldCheck,
-    title: "Conformite assuree",
-    text: "Normes NF et PMR integrees dans chaque phase du chantier.",
+    title: "Conformité assurée",
+    text: "Normes NF et PMR intégrées dans chaque phase du chantier.",
     metric: "100%",
   },
   {
     icon: Clock3,
     title: "Intervention rapide",
-    text: "Equipe mobilisable en urgence avec un pilotage operationnel clair.",
+    text: "Équipe mobilisable en urgence avec un pilotage opérationnel clair.",
     metric: "24/7",
   },
   {
-    icon: Sparkles,
+    icon: Award,
     title: "Rendu professionnel",
-    text: "Marquage lisible, signalisation propre et finitions soignees.",
+    text: "Marquage lisible, signalisation propre et finitions soignées.",
     metric: "10+ ans",
   },
 ];
 
-const processSteps = ["Diagnostic terrain", "Plan action", "Execution", "Controle final"];
+const processSteps = ["Diagnostic terrain", "Plan d'action", "Exécution", "Contrôle final"];
 const tickerItems = [
   "Devis sous 24h",
   "Diagnostic circulation offert",
-  "Creneaux de nuit disponibles",
-  "Accompagnement collectivites",
+  "Créneaux de nuit disponibles",
+  "Accompagnement collectivités",
   "Intervention urgente sur appel",
-  "Contact: 06 05 76 99 52",
+  "Contact : 06 05 76 99 52",
 ];
 
 export default function About() {
@@ -82,15 +82,22 @@ export default function About() {
           </div>
 
           <h2 className="mt-5 max-w-5xl text-heading-1 text-[#0d0d0f]">
-            Une equipe qui transforme vos contraintes terrain en <span className="text-tk-orange">resultats visibles</span>
+            Une équipe qui transforme vos contraintes terrain en <span className="text-transparent bg-clip-text bg-gradient-to-r from-tk-orange to-[#ff8947]">résultats visibles</span>
           </h2>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {quickStats.map((item) => (
-              <div key={item.label} className="rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5">
+            {quickStats.map((item, idx) => (
+              <motion.div
+                key={item.label}
+                className="rounded-xl bg-white/60 backdrop-blur-md px-4 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 transition-transform duration-300 hover:-translate-y-1"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * idx }}
+              >
                 <p className="text-xl font-black text-[#0f1012]">{item.value}</p>
                 <p className="text-xs font-bold uppercase tracking-[0.13em] text-[#5a5f6a]">{item.label}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -103,15 +110,15 @@ export default function About() {
             className="lg:col-span-6"
           >
             <p className="text-base leading-relaxed text-[#3d4048] md:text-lg">
-              TK AREA accompagne les projets de marquage, signalisation et amenagement avec une methode simple:
-              analyser, securiser, executer, controler. Vous gagnez du temps, de la clarte et un rendu professionnel.
+              TK AREA accompagne les projets de marquage, signalisation et aménagement avec une méthode simple :
+              analyser, sécuriser, exécuter, contrôler. Vous gagnez du temps, de la clarté et un rendu professionnel.
             </p>
 
             <div className="mt-6 space-y-3">
               {[
-                "Pilotage operationnel du demarrage a la livraison",
-                "Coordination equipe, materiel et contraintes de site",
-                "Suivi qualite final avec verification terrain",
+                "Pilotage opérationnel du démarrage à la livraison",
+                "Coordination équipe, matériel et contraintes de site",
+                "Suivi qualité final avec vérification terrain",
               ].map((point, index) => (
                 <motion.div
                   key={point}
@@ -119,10 +126,11 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ delay: 0.08 * index }}
-                  className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5"
+                  whileHover={{ x: 5 }}
+                  className="flex items-center gap-3 rounded-xl bg-white/70 backdrop-blur-sm px-4 py-3 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-white/60 cursor-default"
                 >
-                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-tk-orange" />
-                  <p className="text-sm text-[#2e323b]">{point}</p>
+                  <CheckCircle2 size={18} className="shrink-0 text-tk-orange drop-shadow-sm" />
+                  <p className="text-sm font-medium text-[#2e323b]">{point}</p>
                 </motion.div>
               ))}
             </div>
@@ -130,28 +138,30 @@ export default function About() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-tk-orange px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-tk-orange/35"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-tk-orange px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-white transition-all hover:scale-105 hover:shadow-[0_10px_25px_rgba(255,77,0,0.4)]"
               >
                 Parler du projet
                 <ArrowRight size={16} />
               </a>
               <a
                 href="#realisations"
-                className="inline-flex items-center justify-center rounded-full border border-[#131313]/20 bg-white px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-[#141417] transition-all hover:border-[#141417]/35"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#131313]/10 bg-white/50 backdrop-blur-md px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-[#141417] transition-all hover:border-[#141417]/80 hover:bg-white"
               >
-                Voir nos realisations
+                Voir nos réalisations
               </a>
             </div>
 
-            <div className="mt-7 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/6 md:p-5">
-              <div className="mb-3 flex items-center gap-2">
-                <Workflow size={16} className="text-tk-orange" />
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#343944]">Methode agence</p>
+            <div className="mt-7 rounded-2xl bg-white/80 backdrop-blur-lg p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60">
+              <div className="mb-4 flex items-center gap-2">
+                <Workflow size={18} className="text-tk-orange" />
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#343944]">Méthode agence</p>
               </div>
-              <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 {processSteps.map((step, idx) => (
-                  <div key={step} className="rounded-lg bg-[#f4f6fb] px-3 py-2 text-xs font-bold text-[#2c313a]">
-                    {idx + 1}. {step}
+                  <div key={step} className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#f4f6fb] to-white px-3 py-2.5 text-xs font-bold text-[#2c313a] shadow-sm border border-black/5 group">
+                    <div className="absolute inset-0 bg-tk-orange/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    <span className="relative z-10 text-tk-orange mr-1">{idx + 1}.</span>
+                    <span className="relative z-10">{step}</span>
                   </div>
                 ))}
               </div>
@@ -237,21 +247,80 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: index * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/6"
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl bg-white/80 backdrop-blur-md p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white transition-all duration-300 hover:shadow-[0_20px_40px_rgba(255,77,0,0.1)]"
               >
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-tk-orange text-white">
-                    <Icon size={18} />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-tk-orange/5 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-tk-orange/10 transition-colors duration-500" />
+                <div className="mb-5 flex items-center justify-between relative z-10">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-tk-orange to-[#ff6a1a] text-white shadow-lg shadow-tk-orange/20">
+                    <Icon size={22} className="group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <span className="text-lg font-black text-[#121212]">{item.metric}</span>
+                  <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#121212] to-[#4a4f59]">{item.metric}</span>
                 </div>
-                <h3 className="text-lg font-black text-[#121212]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#4b4f59]">{item.text}</p>
+                <h3 className="text-lg font-black text-[#121212] relative z-10">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#4b4f59] relative z-10">{item.text}</p>
               </motion.article>
             );
           })}
         </div>
+
+        {/* ── SECTION ROUTE — image plein largeur, texte gauche + droite ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 relative overflow-hidden rounded-2xl md:rounded-3xl"
+          style={{ minHeight: 280 }}
+        >
+          {/* Image de fond — route jaune vers l'infini */}
+          <Image
+            src="https://images.unsplash.com/photo-1661666095235-dc13a42b0d78?q=80&w=1400&auto=format&fit=crop"
+            alt="Route marquée vers l'horizon"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+
+          {/* Voile sombre pour lisibilité du texte */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/75" />
+
+          {/* Contenu — texte gauche / texte droite */}
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between h-full px-7 py-10 md:px-12 md:py-12 gap-8 sm:gap-0">
+
+            {/* Gauche */}
+            <div className="text-center sm:text-left max-w-xs">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-tk-orange mb-2">Notre terrain</p>
+              <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                Chaque mètre carré<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-tk-orange to-orange-300">compte.</span>
+              </h3>
+              <p className="mt-3 text-sm text-white/60 leading-relaxed max-w-[220px] mx-auto sm:mx-0">
+                Du bitume à la signalisation, nous intervenons partout où la précision fait la différence.
+              </p>
+            </div>
+
+            {/* Séparateur vertical — desktop seulement */}
+            <div className="hidden sm:block h-20 w-px bg-white/15" />
+
+            {/* Droite */}
+            <div className="text-center sm:text-right max-w-xs">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-tk-orange mb-2">Notre bilan</p>
+              <div className="flex flex-col gap-3">
+                {[
+                  { val: "1 800+", lbl: "chantiers réalisés" },
+                  { val: "Grand Ouest", lbl: "zone d'intervention" },
+                  { val: "< 24h", lbl: "délai d'étude" },
+                ].map((s) => (
+                  <div key={s.val} className="flex items-baseline gap-2 justify-center sm:justify-end">
+                    <span className="text-xl font-black text-white">{s.val}</span>
+                    <span className="text-xs text-white/50 font-medium">{s.lbl}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -276,28 +345,30 @@ export default function About() {
             </div>
           </article>
 
-          <article className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-white p-5 md:p-6 lg:p-7 shadow-sm ring-1 ring-black/6 lg:col-span-4">
+          <article className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-white/90 backdrop-blur-xl p-5 md:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white lg:col-span-4">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-tk-orange">Contact direct</p>
             <h3 className="mt-3 text-xl md:text-2xl font-black text-[#121212] leading-tight">Une question ? On avance vite.</h3>
             <p className="mt-3 text-sm md:text-sm leading-relaxed text-[#4a4f59]">
               Partagez votre besoin et nous revenons avec un cadrage clair, un délai réaliste et une proposition
               concrète.
             </p>
-            <div className="mt-5 md:mt-6 space-y-2.5 md:space-y-2 rounded-xl md:rounded-2xl bg-[#f5f6fa] p-4 md:p-4">
-              <a href="tel:0605769952" className="block text-base md:text-sm font-bold text-[#17191d] hover:text-tk-orange transition-colors">
-                📞 06 05 76 99 52
+            <div className="mt-5 md:mt-6 space-y-2.5 md:space-y-2 rounded-xl md:rounded-2xl bg-[#f5f6fa]/80 p-4 md:p-4 border border-[#e5e7eb]">
+              <a href="tel:0605769952" className="flex items-center gap-2 text-base md:text-sm font-bold text-[#17191d] hover:text-tk-orange transition-colors">
+                <span className="text-lg">📞</span> 06 05 76 99 52
               </a>
-              <a href="mailto:info@tkarea.fr" className="block text-sm text-[#4a4f59] hover:text-tk-orange transition-colors">
-                ✉️ info@tkarea.fr
+              <a href="mailto:info@tkarea.fr" className="flex items-center gap-2 text-sm text-[#4a4f59] hover:text-tk-orange transition-colors">
+                <span className="text-lg">✉️</span> info@tkarea.fr
               </a>
-              <p className="text-sm text-[#4a4f59]">📍 2 Allée Mélilot, 49080 Bouchemaine</p>
+              <p className="flex items-center gap-2 text-sm text-[#4a4f59]">
+                <span className="text-lg">📍</span> 2 Allée Mélilot, 49080 Bouchemaine
+              </p>
             </div>
             <a
               href="#contact"
-              className="mt-5 md:mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-tk-orange hover:gap-3 transition-all"
+              className="mt-6 md:mt-8 flex items-center justify-center w-full gap-2 rounded-xl bg-[#121212] py-4 text-sm font-black uppercase tracking-[0.14em] text-white hover:bg-tk-orange transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
-              Contacter agence
-              <ArrowRight size={16} />
+              Contacter l&apos;agence
+              <ArrowRight size={18} />
             </a>
           </article>
         </motion.div>
