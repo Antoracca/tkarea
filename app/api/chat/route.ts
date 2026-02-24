@@ -22,8 +22,8 @@ ZONE D'INTERVENTION : Grand Ouest — Pays de la Loire, Bretagne, Normandie, Cen
 
 CONTACT :
 - Téléphone : 06 05 76 99 52
-- Email : info@tkarea.fr
-- Adresse : 2 Allée Mélilot, 49080 Bouchemaine
+- Email : info@tkarea.com
+- Adresse : 8 Rue Mélilot, 49080 Bouchemaine
 
 INFOS COMMERCIALES :
 - Devis gratuit sous 24h

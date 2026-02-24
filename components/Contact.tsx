@@ -113,8 +113,8 @@ ${formData.message}
     {
       icon: MapPin,
       title: "Adresse",
-      content: "2 Allée Mélilot, 49080 Bouchemaine",
-      link: "https://maps.google.com/?q=2+All%C3%A9e+M%C3%A9lilot+49080+Bouchemaine",
+      content: "8 Rue Mélilot, 49080 Bouchemaine",
+      link: "https://maps.google.com/?q=8+Rue+M%C3%A9lilot+49080+Bouchemaine",
     },
   ];
 
