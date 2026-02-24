@@ -40,7 +40,7 @@ export default function Confidentialite() {
                         <p className="text-gray-300 leading-relaxed text-justify">
                             Le responsable du traitement des données personnelles collectées dans le cadre du site et
                             des éventuelles commandes est la société <strong>TK ARÉA</strong> (SAS au capital de 10 000€),
-                            dont le siège social est sis au 2 Allée Melilot, 49080 Bouchemaine, immatriculée sous le numéro
+                            dont le siège social est sis au 8 Rue Mélilot, 49080 Bouchemaine, immatriculée sous le numéro
                             de SIRET 123 456 789 00012. Le Délégué à la Protection des Données (DPO) peut être joint à tout
                             moment à l'adresse suivante : info@tkarea.fr.
                         </p>

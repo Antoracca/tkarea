@@ -170,7 +170,7 @@ export default function Footer() {
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-0.5">Siège Social</p>
                   <address className="text-sm font-medium text-gray-400 not-italic leading-relaxed">
-                    2 Allée Melilot<br />
+                    8 Rue Mélilot<br />
                     49080 Bouchemaine<br />
                     France
                   </address>

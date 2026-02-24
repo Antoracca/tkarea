@@ -14,7 +14,7 @@ export default function StructuredData() {
     "priceRange": "€€",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "2 Allée Melilot",
+      "streetAddress": "8 Rue Mélilot",
       "addressLocality": "Bouchemaine",
       "postalCode": "49080",
       "addressRegion": "Maine-et-Loire",

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Mentions Légales | TK ARÉA",
-  description: "Mentions légales de TK ARÉA, entreprise spécialisée en marquage au sol, signalisation routière et aménagement urbain. Siège social : 2 Allée Melilot, 49080 Bouchemaine.",
+  description: "Mentions légales de TK ARÉA, entreprise spécialisée en marquage au sol, signalisation routière et aménagement urbain. Siège social : 8 Rue Mélilot, 49080 Bouchemaine.",
   robots: { index: true, follow: true },
   alternates: { canonical: "https://tkarea.fr/mentions-legales" },
 };
@@ -36,7 +36,7 @@ export default function MentionsLegales() {
                             <li><strong>Propriétaire et Éditeur du site :</strong> TK ARÉA</li>
                             <li><strong>Statut juridique :</strong> Société par Actions Simplifiée (SAS) - <em>(Information factice à adapter)</em></li>
                             <li><strong>Capital social :</strong> 10 000 €</li>
-                            <li><strong>Siège social :</strong> 2 Allée Melilot, 49080 Bouchemaine, France</li>
+                            <li><strong>Siège social :</strong> 8 Rue Mélilot, 49080 Bouchemaine, France</li>
                             <li><strong>RCS :</strong> Angers B 123 456 789 <em>(Numéro à adapter)</em></li>
                             <li><strong>Numéro de TVA intracommunautaire :</strong> FR 12 123456789 <em>(Numéro à adapter)</em></li>
                             <li><strong>Contact :</strong> info@tkarea.fr | 06 05 76 99 52</li>
