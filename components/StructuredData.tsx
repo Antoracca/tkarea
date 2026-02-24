@@ -2,12 +2,12 @@ export default function StructuredData() {
   const localBusiness = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://tkarea.fr/#business",
+    "@id": "https://tkarea.com/#business",
     "name": "TK ARÉA",
     "alternateName": "TK Area",
-    "image": "https://tkarea.fr/logo1.png",
-    "logo": "https://tkarea.fr/logo1.png",
-    "url": "https://tkarea.fr",
+    "image": "https://tkarea.com/logo1.png",
+    "logo": "https://tkarea.com/logo1.png",
+    "url": "https://tkarea.com",
     "telephone": "+33605769952",
     "email": "info@tkarea.com",
     "description": "TK ARÉA est une entreprise spécialisée en marquage au sol, signalisation routière et aménagement urbain. Intervention d'urgence 24/7 sur Angers, Maine-et-Loire et les Pays de la Loire. Devis gratuit sous 24h, conformité 100% aux normes NF et PMR.",
@@ -69,7 +69,7 @@ export default function StructuredData() {
             "@type": "Service",
             "name": "Marquage au sol",
             "description": "Traçage routier, industriel et sportif haute performance avec peinture thermoplastique certifiée NF. Marquage parking, passage piéton, zone logistique.",
-            "provider": { "@id": "https://tkarea.fr/#business" }
+            "provider": { "@id": "https://tkarea.com/#business" }
           }
         },
         {
@@ -78,7 +78,7 @@ export default function StructuredData() {
             "@type": "Service",
             "name": "Signalisation routière",
             "description": "Installation de panneaux verticaux, balises de protection, mâts certifiés et signalisation temporaire de chantier conformes aux normes NF.",
-            "provider": { "@id": "https://tkarea.fr/#business" }
+            "provider": { "@id": "https://tkarea.com/#business" }
           }
         },
         {
@@ -87,7 +87,7 @@ export default function StructuredData() {
             "@type": "Service",
             "name": "Aménagement urbain",
             "description": "Mobilier urbain, ralentisseurs zones 30, bornes de protection, aménagements PMR et solutions d'accessibilité totale.",
-            "provider": { "@id": "https://tkarea.fr/#business" }
+            "provider": { "@id": "https://tkarea.com/#business" }
           }
         }
       ]

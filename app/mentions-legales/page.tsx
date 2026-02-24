@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Mentions Légales | TK ARÉA",
   description: "Mentions légales de TK ARÉA, entreprise spécialisée en marquage au sol, signalisation routière et aménagement urbain. Siège social : 8 Rue Mélilot, 49080 Bouchemaine.",
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://tkarea.fr/mentions-legales" },
+  alternates: { canonical: "https://tkarea.com/mentions-legales" },
 };
 
 export default function MentionsLegales() {
@@ -29,7 +29,7 @@ export default function MentionsLegales() {
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
                             En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique,
-                            il est précisé aux utilisateurs du site <strong>tkarea.fr</strong> l'identité des différents intervenants
+                            il est précisé aux utilisateurs du site <strong>tkarea.com</strong> l'identité des différents intervenants
                             dans le cadre de sa réalisation et de son suivi :
                         </p>
                         <ul className="list-disc pl-6 text-gray-300 space-y-2 marker:text-tk-orange mb-4">
@@ -49,7 +49,7 @@ export default function MentionsLegales() {
                             <span className="w-8 h-px bg-tk-orange" /> 2. Hébergement
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
-                            Le site <strong>tkarea.fr</strong> est hébergé par la société <strong>Vercel Inc.</strong><br />
+                            Le site <strong>tkarea.com</strong> est hébergé par la société <strong>Vercel Inc.</strong><br />
                             <strong>Siège social de l'hébergeur :</strong> 340 S Lemon Ave #4133 Walnut, CA 91789, États-Unis.<br />
                             <strong>Contact de l'hébergeur :</strong> privacy@vercel.com<br />
                             Les serveurs physiques garantissant le stockage des données sont situés au sein de l'Union Européenne (Région AWS Paris/Francfort), en conformité avec les exigences du Règlement Général sur la Protection des Données (RGPD).
@@ -61,7 +61,7 @@ export default function MentionsLegales() {
                             <span className="w-8 h-px bg-tk-orange" /> 3. Conditions générales d'utilisation (CGU)
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
-                            L'utilisation du site <strong>tkarea.fr</strong> implique l'acceptation pleine et entière des conditions générales d'utilisation ci-après décrites.
+                            L'utilisation du site <strong>tkarea.com</strong> implique l'acceptation pleine et entière des conditions générales d'utilisation ci-après décrites.
                             Ces conditions d'utilisation sont susceptibles d'être modifiées ou complétées à tout moment, les utilisateurs du site sont donc invités à les consulter de manière régulière.
                             Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de maintenance technique peut
                             être toutefois décidée par l'éditeur, qui s'efforcera alors de communiquer préalablement aux utilisateurs les dates et heures de l'intervention.
@@ -93,7 +93,7 @@ export default function MentionsLegales() {
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
                             <strong>TK ARÉA</strong> ne pourra être tenue responsable des dommages directs et indirects causés au matériel
-                            de l’utilisateur, lors de l’accès au site web <strong>tkarea.fr</strong>, et résultant soit de l’utilisation d’un matériel
+                            de l’utilisateur, lors de l’accès au site web <strong>tkarea.com</strong>, et résultant soit de l’utilisation d’un matériel
                             ne répondant pas aux spécifications techniques, soit de l’apparition d’un bug ou d’une incompatibilité.
                         </p>
                         <p className="text-gray-300 leading-relaxed text-justify">
@@ -108,7 +108,7 @@ export default function MentionsLegales() {
                             <span className="w-8 h-px bg-tk-orange" /> 6. Liens hypertextes et Cookies
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
-                            Le site <strong>tkarea.fr</strong> contient un certain nombre de liens hypertextes vers d’autres sites (partenaires, réseaux sociaux, informations).
+                            Le site <strong>tkarea.com</strong> contient un certain nombre de liens hypertextes vers d’autres sites (partenaires, réseaux sociaux, informations).
                             Cependant, <strong>TK ARÉA</strong> n’a pas la possibilité de vérifier le contenu des sites ainsi visités, et n’assumera en conséquence aucune responsabilité de ce fait.
                         </p>
                         <p className="text-gray-300 leading-relaxed text-justify">
@@ -125,7 +125,7 @@ export default function MentionsLegales() {
                             <span className="w-8 h-px bg-tk-orange" /> 7. Droit applicable et attribution de juridiction
                         </h2>
                         <p className="text-gray-300 leading-relaxed text-justify">
-                            Tout litige en relation avec l’utilisation du site <strong>tkarea.fr</strong> est soumis au droit français.
+                            Tout litige en relation avec l’utilisation du site <strong>tkarea.com</strong> est soumis au droit français.
                             Il est fait attribution exclusive de juridiction aux tribunaux compétents dont dépend le siège social de <strong>TK ARÉA</strong>,
                             à savoir le Tribunal de Commerce d'Angers, sous réserve d'une attribution de compétence spécifique
                             découlant d'un texte de loi ou réglementaire particulier.

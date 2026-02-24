@@ -69,14 +69,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tkarea.fr'),
+  metadataBase: new URL('https://tkarea.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: "TK ARÉA | Marquage au Sol & Signalisation Routière — Angers, Pays de la Loire",
     description: "Entreprise experte en marquage au sol, signalisation routière et aménagement urbain. Devis gratuit sous 24h. Intervention d'urgence 24/7 sur Angers, Maine-et-Loire, Pays de la Loire.",
-    url: 'https://tkarea.fr',
+    url: 'https://tkarea.com',
     siteName: 'TK ARÉA',
     locale: 'fr_FR',
     type: 'website',

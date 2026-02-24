@@ -210,7 +210,7 @@ export default function PageLoader() {
         transition={{ delay: 0.8 }}
         className="absolute bottom-4 left-5 text-[9px] font-mono text-white/10 tracking-widest uppercase"
       >
-        tkarea.fr
+        tkarea.com
       </motion.span>
 
     </motion.div>

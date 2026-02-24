@@ -8,7 +8,7 @@
 - **Siège social** : 8 Rue Mélilot, 49080 Bouchemaine, France
 - **Téléphone** : 06 05 76 99 52 (+33 6 05 76 99 52)
 - **Email** : info@tkarea.com
-- **Site web** : https://tkarea.fr
+- **Site web** : https://tkarea.com
 - **Disponibilité** : 24h/24, 7j/7, urgences incluses
 - **Devis** : Gratuit, réponse sous 24 heures
 - **Gamme de prix** : Moyenne gamme (€€), rapport qualité/prix élevé
@@ -137,10 +137,10 @@ Asphalte, béton, résine, pavés, sols industriels, surfaces sportives — TK A
 
 ## Pages du site
 
-- [Accueil](https://tkarea.fr) — Présentation générale, services, réalisations
-- [Mentions légales](https://tkarea.fr/mentions-legales) — Informations légales de la société
-- [Politique de confidentialité](https://tkarea.fr/confidentialite) — Protection des données
-- [Conditions Générales de Vente](https://tkarea.fr/cgv) — Conditions commerciales
+- [Accueil](https://tkarea.com) — Présentation générale, services, réalisations
+- [Mentions légales](https://tkarea.com/mentions-legales) — Informations légales de la société
+- [Politique de confidentialité](https://tkarea.com/confidentialite) — Protection des données
+- [Conditions Générales de Vente](https://tkarea.com/cgv) — Conditions commerciales
 
 ## Contact
 
@@ -148,7 +148,7 @@ Pour toute demande de devis, renseignement ou intervention d'urgence :
 
 - **Téléphone** : 06 05 76 99 52 (24h/24, 7j/7)
 - **Email** : info@tkarea.com
-- **Formulaire en ligne** : https://tkarea.fr/#contact
+- **Formulaire en ligne** : https://tkarea.com/#contact
 - **Adresse** : 8 Rue Mélilot, 49080 Bouchemaine, France
 
 ---

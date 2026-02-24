@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Politique de Confidentialité | TK ARÉA",
   description: "Politique de confidentialité et protection des données personnelles de TK ARÉA, entreprise de marquage au sol et signalisation routière en Maine-et-Loire.",
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://tkarea.fr/confidentialite" },
+  alternates: { canonical: "https://tkarea.com/confidentialite" },
 };
 
 export default function Confidentialite() {
@@ -28,7 +28,7 @@ export default function Confidentialite() {
                             Chez <strong>TK ARÉA</strong>, nous accordons une importance fondamentale à la protection de la vie privée
                             de nos clients et utilisateurs. La présente Politique de Confidentialité a pour but de vous exposer de manière
                             claire, transparente et exhaustive les processus de collecte, d'utilisation, de traitement et de protection
-                            de vos données à caractère personnel lorsque vous naviguez sur le site <strong>tkarea.fr</strong> ou
+                            de vos données à caractère personnel lorsque vous naviguez sur le site <strong>tkarea.com</strong> ou
                             interagissez avec nos services (simulateur de devis, formulaire de contact).
                         </p>
                     </div>

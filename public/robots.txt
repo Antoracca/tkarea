@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://tkarea.fr/sitemap.xml
+Sitemap: https://tkarea.com/sitemap.xml
