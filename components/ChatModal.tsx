@@ -485,7 +485,7 @@ export default function ChatModal({
                     </button>
                   </div>
                   <p className="text-center text-[10px] text-gray-400 mt-2 font-medium">
-                    Propulsé par IA · Réponse non contractuelle
+                    Propulsé par intelligence artificielle · Réponse non contractuelle
                   </p>
                 </div>
               </>
