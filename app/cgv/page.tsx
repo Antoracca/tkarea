@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Conditions Générales de Vente | TK ARÉA",
+  description: "Conditions générales de vente de TK ARÉA. Services de marquage au sol, signalisation et aménagement urbain. Intervention sur tout le territoire national.",
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://tkarea.fr/cgv" },
+};
 
 export default function CGV() {
     return (

@@ -232,6 +232,8 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
                           key={`${service.slug}-${idx}`}
                           src={imgUrl}
                           alt={`${service.title} - Image ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: currentImageIndex === idx ? 1 : 0 }}
@@ -253,6 +255,8 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
                         <img
                           src={imgUrl}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-50 scale-125"
                         />
 
@@ -260,6 +264,8 @@ function ServiceItem({ service, index }: { service: typeof services[0]; index: n
                         <img
                           src={imgUrl}
                           alt={`${service.title} - Image ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
                           className="absolute inset-0 w-full h-full object-contain p-2 md:p-6 drop-shadow-2xl transition-transform duration-1000 group-hover:scale-[1.03]"
                         />
                       </motion.div>

@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Politique de Confidentialité | TK ARÉA",
+  description: "Politique de confidentialité et protection des données personnelles de TK ARÉA, entreprise de marquage au sol et signalisation routière en Maine-et-Loire.",
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://tkarea.fr/confidentialite" },
+};
 
 export default function Confidentialite() {
     return (
