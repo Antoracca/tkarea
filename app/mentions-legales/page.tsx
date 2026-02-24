@@ -39,7 +39,7 @@ export default function MentionsLegales() {
                             <li><strong>Siège social :</strong> 8 Rue Mélilot, 49080 Bouchemaine, France</li>
                             <li><strong>RCS :</strong> Angers B 123 456 789 <em>(Numéro à adapter)</em></li>
                             <li><strong>Numéro de TVA intracommunautaire :</strong> FR 12 123456789 <em>(Numéro à adapter)</em></li>
-                            <li><strong>Contact :</strong> info@tkarea.com | 06 05 76 99 52</li>
+                            <li><strong>Contact :</strong> info@tkarea.fr | 06 05 76 99 52</li>
                             <li><strong>Directeur de la publication :</strong> Le Président de TK ARÉA</li>
                         </ul>
                     </section>

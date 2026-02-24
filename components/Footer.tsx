@@ -153,13 +153,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:info@tkarea.com" className="group flex items-start gap-4">
+                <a href="mailto:info@tkarea.fr" className="group flex items-start gap-4">
                   <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-tk-orange/10 text-tk-orange transition-colors group-hover:bg-tk-orange group-hover:text-white">
                     <Mail size={14} />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mb-0.5">Email</p>
-                    <p className="text-sm font-semibold text-gray-300 transition-colors group-hover:text-white">info@tkarea.com</p>
+                    <p className="text-sm font-semibold text-gray-300 transition-colors group-hover:text-white">info@tkarea.fr</p>
                   </div>
                 </a>
               </li>

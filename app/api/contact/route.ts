@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     // Exemple avec Resend:
     // const { data, error } = await resend.emails.send({
     //   from: 'TK ARÉA <onboarding@resend.dev>',
-    //   to: ['info@tkarea.com'],
+    //   to: ['info@tkarea.fr'],
     //   subject: `Nouveau projet de ${name}`,
     //   html: `
     //     <h2>Nouveau contact depuis le site</h2>

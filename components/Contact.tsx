@@ -107,8 +107,8 @@ ${formData.message}
     {
       icon: Mail,
       title: "Email",
-      content: "info@tkarea.com",
-      link: "mailto:info@tkarea.com",
+      content: "info@tkarea.fr",
+      link: "mailto:info@tkarea.fr",
     },
     {
       icon: MapPin,

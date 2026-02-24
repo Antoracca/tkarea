@@ -9,7 +9,7 @@ export default function StructuredData() {
     "logo": "https://tkarea.fr/logo1.png",
     "url": "https://tkarea.fr",
     "telephone": "+33605769952",
-    "email": "info@tkarea.com",
+    "email": "info@tkarea.fr",
     "description": "TK ARÉA est une entreprise spécialisée en marquage au sol, signalisation routière et aménagement urbain. Intervention d'urgence 24/7 sur Angers, Maine-et-Loire et les Pays de la Loire. Devis gratuit sous 24h, conformité 100% aux normes NF et PMR.",
     "priceRange": "€€",
     "address": {
@@ -112,7 +112,7 @@ export default function StructuredData() {
         "name": "Combien coûte un marquage au sol ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Le tarif d'un marquage au sol dépend de la surface, du type de peinture et de la complexité du tracé. TK ARÉA propose un devis gratuit personnalisé sous 24h. Contactez-nous au 06 05 76 99 52 ou par email à info@tkarea.com."
+          "text": "Le tarif d'un marquage au sol dépend de la surface, du type de peinture et de la complexité du tracé. TK ARÉA propose un devis gratuit personnalisé sous 24h. Contactez-nous au 06 05 76 99 52 ou par email à info@tkarea.fr."
         }
       },
       {
