@@ -42,7 +42,7 @@ export default function Confidentialite() {
                             des éventuelles commandes est la société <strong>TK ARÉA</strong> (SAS au capital de 10 000€),
                             dont le siège social est sis au 8 Rue Mélilot, 49080 Bouchemaine, immatriculée sous le numéro
                             de SIRET 123 456 789 00012. Le Délégué à la Protection des Données (DPO) peut être joint à tout
-                            moment à l'adresse suivante : info@tkarea.fr.
+                            moment à l'adresse suivante : info@tkarea.com.
                         </p>
                     </section>
 
@@ -174,7 +174,7 @@ export default function Confidentialite() {
                             <p className="text-white font-medium mb-2">Comment exercer vos droits ?</p>
                             <p className="text-gray-300 text-sm">
                                 Faites-nous simplement parvenir votre demande explicite en envoyant un courriel
-                                au délégué à la protection des données DPO de TK ARÉA via : <strong>info@tkarea.fr</strong>.<br />
+                                au délégué à la protection des données DPO de TK ARÉA via : <strong>info@tkarea.com</strong>.<br />
                                 Vous disposez également du droit de déposer une réclamation (plainte) officielle auprès
                                 de la Commission Nationale de l'Informatique et des Libertés (CNIL).
                             </p>

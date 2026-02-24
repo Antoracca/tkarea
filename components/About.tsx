@@ -356,8 +356,8 @@ export default function About() {
               <a href="tel:0605769952" className="flex items-center gap-2 text-base md:text-sm font-bold text-[#17191d] hover:text-tk-orange transition-colors">
                 <span className="text-lg">📞</span> 06 05 76 99 52
               </a>
-              <a href="mailto:info@tkarea.fr" className="flex items-center gap-2 text-sm text-[#4a4f59] hover:text-tk-orange transition-colors">
-                <span className="text-lg">✉️</span> info@tkarea.fr
+              <a href="mailto:info@tkarea.com" className="flex items-center gap-2 text-sm text-[#4a4f59] hover:text-tk-orange transition-colors">
+                <span className="text-lg">✉️</span> info@tkarea.com
               </a>
               <p className="flex items-center gap-2 text-sm text-[#4a4f59]">
                 <span className="text-lg">📍</span> 2 Allée Mélilot, 49080 Bouchemaine
