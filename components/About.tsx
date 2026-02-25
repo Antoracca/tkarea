@@ -6,14 +6,14 @@ import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Award, Workflow } from "
 import { useRef } from "react";
 
 const partners = [
-  { name: "Eiffage", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Eiffage_logo.svg" },
-  { name: "Vinci", logo: "/logovinci.png" },
-  { name: "Bouygues", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Bouygues_logo.svg" },
-  { name: "Airbus", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Airbus_Logo_2017.svg" },
-  { name: "Manitou", logo: "https://companieslogo.com/img/orig/MTU.PA_BIG-312f1726.png?t=1720244493" },
-  { name: "Spie", logo: "https://companieslogo.com/img/orig/SPIE.PA_BIG-168c2800.png?t=1750695705" },
-  { name: "EDF", logo: "https://companieslogo.com/img/orig/EDF.PA_BIG-9c97fdce.png?t=1720244491" },
-  { name: "Lidl", logo: "https://companieslogo.com/img/orig/lidl-retail-8f969d52.png?t=1720244494" },
+  { name: "Eiffage", logo: "/logos/eiffage.svg" },
+  { name: "Vinci", logo: "/logos/vinci.png" },
+  { name: "Bouygues", logo: "/logos/bouygues.svg" },
+  { name: "Airbus", logo: "/logos/airbus.svg" },
+  { name: "Manitou", logo: "/logos/manitou.png" },
+  { name: "Spie", logo: "/logos/spie.png" },
+  { name: "EDF", logo: "/logos/edf.png" },
+  { name: "Lidl", logo: "/logos/lidl.png" },
 ];
 
 const quickStats = [
