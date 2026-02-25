@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 const partners = [
   { name: "Eiffage", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Eiffage_logo.svg" },
-  { name: "Vinci", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Vinci_logo.svg" },
+  { name: "Vinci", logo: "/logovinci.png" },
   { name: "Bouygues", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Bouygues_logo.svg" },
   { name: "Airbus", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Airbus_Logo_2017.svg" },
   { name: "Manitou", logo: "https://companieslogo.com/img/orig/MTU.PA_BIG-312f1726.png?t=1720244493" },
@@ -252,7 +252,7 @@ export default function About() {
                   <img
                     src={partner.logo}
                     alt={`Logo ${partner.name}`}
-                    className="h-7 w-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                    className="h-7 w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                   <span className="text-[9px] font-bold uppercase tracking-wider text-[#9aa0aa] group-hover:text-[#4a4f5a] transition-colors duration-300 text-center leading-tight">{partner.name}</span>
                 </div>
