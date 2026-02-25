@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",      // Génère un dossier /out avec HTML/CSS/JS statiques
+  trailingSlash: true,   // Compatibilité hébergement IONOS (index.html dans chaque dossier)
   compress: true,
   poweredByHeader: false,
   images: {
+    unoptimized: true,   // Requis pour l'export statique (pas de serveur Next.js)
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 86400,
     remotePatterns: [
