@@ -28,7 +28,7 @@ const portfolioItems: PortfolioItem[] = [
     id: "p1",
     title: "Signalisation complète de zone",
     category: "Signalisation",
-    image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1200&auto=format&fit=crop",
+    image: "https://www.signaletique-express.fr/img/psblog/b/lg-b-definition-de-la-signaletique.png",
     location: "Maine-et-Loire",
     result: "100% Conforme NF",
     description: "Installation rapide avec sécurisation immédiate des usagers",

@@ -5,7 +5,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CheckCircle2, Clock3, ShieldCheck, Award, Workflow } from "lucide-react";
 import { useRef } from "react";
 
-const trustedBy = ["Collectivités", "BTP", "Industrie", "Logistique", "Immobilier", "Voirie"];
+const partners = [
+  { name: "Eiffage", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Eiffage_logo.svg" },
+  { name: "Vinci", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Vinci_logo.svg" },
+  { name: "Bouygues", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Bouygues_logo.svg" },
+  { name: "Airbus", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Airbus_Logo_2017.svg" },
+  { name: "Manitou", logo: "https://companieslogo.com/img/orig/MTU.PA_BIG-312f1726.png?t=1720244493" },
+  { name: "Spie", logo: "https://companieslogo.com/img/orig/SPIE.PA_BIG-168c2800.png?t=1750695705" },
+  { name: "EDF", logo: "https://companieslogo.com/img/orig/EDF.PA_BIG-9c97fdce.png?t=1720244491" },
+  { name: "Lidl", logo: "https://companieslogo.com/img/orig/lidl-retail-8f969d52.png?t=1720244494" },
+];
 
 const quickStats = [
   { value: "10+", label: "ans d'expérience" },
@@ -224,16 +233,31 @@ export default function About() {
           viewport={{ once: true, amount: 0.2 }}
           className="mt-8 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5 md:p-6"
         >
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#444955]">Ils nous font confiance</p>
-          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-            {trustedBy.map((item) => (
-              <div
-                key={item}
-                className="flex items-center justify-center rounded-xl border border-[#151515]/10 bg-[#f8f9fc] px-3 py-3 text-center text-xs font-bold uppercase tracking-[0.11em] text-[#1a1c20] md:text-sm"
-              >
-                {item}
-              </div>
-            ))}
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#444955] mb-5">Ils nous font confiance</p>
+          <div className="relative overflow-hidden">
+            {/* Left fade */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            {/* Right fade */}
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            <motion.div
+              className="flex min-w-max items-center gap-4"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            >
+              {[...partners, ...partners].map((partner, idx) => (
+                <div
+                  key={`${partner.name}-${idx}`}
+                  className="flex-shrink-0 flex flex-col items-center justify-center gap-2 px-6 py-4 bg-[#f8f9fc] rounded-xl border border-[#e8eaef] w-36 h-20 group hover:border-tk-orange/30 hover:bg-orange-50 transition-all duration-300 cursor-default"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={`Logo ${partner.name}`}
+                    className="h-7 w-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  />
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#9aa0aa] group-hover:text-[#4a4f5a] transition-colors duration-300 text-center leading-tight">{partner.name}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
 
