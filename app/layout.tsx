@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tkarea.com'),
+  metadataBase: new URL('https://www.tkarea.com'),
   alternates: {
     canonical: '/',
   },
