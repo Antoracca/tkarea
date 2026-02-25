@@ -1,12 +1,3 @@
-# Force HTTPS
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
-# Rediriger sans-www → www
-RewriteCond %{HTTP_HOST} ^tkarea\.com$ [NC]
-RewriteRule ^(.*)$ https://www.tkarea.com/$1 [R=301,L]
-
 # Content-Type correct pour sitemap XML
 AddType application/xml .xml
 

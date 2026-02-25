@@ -1,4 +1,4 @@
-# robots.txt for TK ARÉA
+# robots.txt for TK AREA
 User-agent: *
 Allow: /
 
