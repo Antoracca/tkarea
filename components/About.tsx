@@ -110,7 +110,7 @@ export default function About() {
             className="lg:col-span-6"
           >
             <p className="text-base leading-relaxed text-[#3d4048] md:text-lg">
-              TK AREA accompagne les projets de marquage, signalisation et aménagement avec une méthode simple :
+              TK AREA accompagne les projets de marquage, signalisation, signalétique et aménagement urbain avec une méthode simple :
               analyser, sécuriser, exécuter, contrôler. Vous gagnez du temps, de la clarté et un rendu professionnel.
             </p>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, PaintRoller, TriangleAlert, Building2 } from "lucide-react";
+import { ArrowUpRight, PaintRoller, TriangleAlert, Building2, Signpost } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 const services = [
@@ -49,26 +49,55 @@ const services = [
   },
   {
     id: "03",
-    title: "AMÉNAGEMENT URBAIN",
+    title: "AMÉNAGEMENT & NETTOYAGE BTP",
     slug: "amenagement",
     icon: Building2,
-    description: "Mobilier urbain, sécurisation piétonne et solutions d'accessibilité PMR.",
+    description: "Mobilier urbain, accessibilité PMR, bornes de protection et nettoyage complet de chantier BTP — de la livraison à la remise en état.",
     features: [
       "Mobilier urbain design",
-      "Ralentisseurs zones 30",
       "Aménagements PMR",
-      "Bornes de protection"
+      "Bornes de protection",
+      "Nettoyage fin de chantier",
+      "Haute pression & dépoussiérage",
+      "Remise en état après travaux",
+      "Nettoyage parkings extérieurs",
+      "Préparation avant livraison"
     ],
     images: [
-      "https://metropole.toulouse.fr/sites/toulouse-fr/files/styles/facebook/public/2022-11/30-01-18_proprete.jpg.webp?itok=R2Yn7usb",
-      "https://www.mairie-lognes.fr/medias/2019/08/ST.jpg",
-      "https://pro.choisirmonmetier-paysdelaloire.fr/documents/imagesROME/img_metier_K2303.jpg",
-      "https://www.sepur.com/wp-content/webpc-passthru.php?src=https://www.sepur.com/wp-content/uploads/2022/03/pu-plateau00016-scaled.jpg&nocache=1",
-      "https://khelcombusiness.com/wp-content/uploads/2019/09/photoralentisseur-pourvoiesprivees.jpg"
+      "https://cdn.prod.website-files.com/65670cef9049d03dc839d79c/67f1582ff2ed2622cb8abc63_5%20-%20Building%20Site%20Cleaning.png",
+      "https://cdn.prod.website-files.com/65ef56341b90994f731562d8/6654abb62449af096869a9a3_post-construction-cleanup.jpg",
+      "https://www.servpro.com/dcs-images/v3/assets/blt0a0cb058815d4d96/bltf7adf5c305682439/63c719f19deb3f643ee46041/Construction_cleaning_vacuum_shutterstock_776608678.jpg?format=jpg&quality=75&width=1440",
+      "https://4612653.fs1.hubspotusercontent-na1.net/hubfs/4612653/dust-clean-up.jpg",
+      "https://www.servicemasterclean.com/images/workers.2102021505200.jpg"
     ],
     color: "#FFB366",
-    statValue: "PMR",
-    statLabel: "Accessibilité totale"
+    statValue: "100%",
+    statLabel: "Remise en état"
+  },
+  {
+    id: "04",
+    title: "SIGNALÉTIQUE",
+    slug: "signaletique",
+    icon: Signpost,
+    description: "Signalétique directionnelle, panneaux de sécurité, marquage intérieur et enseigne professionnelle pour espaces publics et privés.",
+    features: [
+      "Signalétique directionnelle",
+      "Panneaux d'évacuation & sécurité",
+      "Marquage sol intérieur",
+      "Enseigne & PLV",
+      "Signalétique PMR intérieure",
+      "Plans d'évacuation réglementaires",
+      "Lettrage adhésif & vitrophanie",
+      "Signalétique de chantier"
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1604709177225-055f99402ea3?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80&w=1200&auto=format&fit=crop"
+    ],
+    color: "#E55C00",
+    statValue: "NF",
+    statLabel: "Normes & sécurité"
   }
 ];
 

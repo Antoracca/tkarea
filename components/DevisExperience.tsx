@@ -738,7 +738,7 @@ export default function DevisExperience() {
               initial={{ opacity: 0, y: 60 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:row-span-2 flex justify-center w-full overflow-visible"
+              className="order-3 lg:order-none lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:row-span-2 flex justify-center w-full overflow-visible"
             >
               <div className="relative flex justify-center">
                 <div className="absolute -inset-16 bg-gradient-to-tr from-tk-orange/15 via-tk-orange/5 to-blue-500/5 rounded-full blur-[80px] pointer-events-none" />
@@ -762,7 +762,7 @@ export default function DevisExperience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="lg:col-span-5 lg:col-start-1 lg:row-start-2 text-center lg:text-left z-20"
+              className="order-2 lg:order-none lg:col-span-5 lg:col-start-1 lg:row-start-2 text-center lg:text-left z-20"
             >
               <p className="text-[16px] md:text-[17px] text-gray-400 leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
                 Dialogue instantané avec notre assistant expert. Réglementations PMR, résines adaptées, plans de circulation : obtenez des réponses précises avant même l&apos;intervention de nos techniciens.
